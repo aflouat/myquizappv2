@@ -1,7 +1,9 @@
 package com.openclassrooms.mddapi.services;
 
 import com.openclassrooms.mddapi.models.Article;
+import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.repositories.ArticleRepository;
+import com.openclassrooms.mddapi.services.impl.ArticleService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,6 +32,7 @@ public class ArticleServiceTest {
     void setUp() {
         article = Article.builder().id(1L).title("TDD Tutorial").build();
 
+
     }
 
 
@@ -49,12 +52,20 @@ public class ArticleServiceTest {
     }
 
 
+
     @Test
     public void testGetAllArticles() {
         when(articleRepository.findAll()).thenReturn(new ArrayList<Article>());
        List<Article> foundArticles = articleService.getAllArticles();
         Assertions.assertEquals(new ArrayList<Article>(), foundArticles);
         verify(articleRepository,times(1)).findAll();
+
+    }
+
+    @Test
+    public void testGetAllCommentsByArticleId() {
+        Comment c1 = Comment.builder().text("Le TDD m'intéresse!").article(article).build();
+        article.getComments().add(c1);
 
     }
 
