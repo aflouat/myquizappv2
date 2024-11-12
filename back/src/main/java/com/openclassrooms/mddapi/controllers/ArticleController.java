@@ -1,10 +1,9 @@
 package com.openclassrooms.mddapi.controllers;
 
 import com.openclassrooms.mddapi.dto.ArticleDto;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -12,7 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/article")
 public class ArticleController implements IArticleController {
     @Override
-    public ResponseEntity<?> create(ArticleDto articleDto) {
+    @PostMapping
+    public ResponseEntity<?> create(@Valid @RequestBody ArticleDto articleDto) {
+
+
         return null;
     }
 

@@ -2,8 +2,12 @@ package com.openclassrooms.mddapi.services;
 
 import com.openclassrooms.mddapi.models.Article;
 import com.openclassrooms.mddapi.models.Comment;
+import com.openclassrooms.mddapi.models.Topic;
+import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repositories.ArticleRepository;
+import com.openclassrooms.mddapi.repositories.CommentRepository;
 import com.openclassrooms.mddapi.services.impl.ArticleService;
+import com.openclassrooms.mddapi.services.impl.CommentService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,14 +29,18 @@ public class ArticleServiceTest {
     @Mock
     ArticleRepository articleRepository;
 
+
     @InjectMocks
     ArticleService articleService;
     private Article article;
+    private User user;
     @BeforeEach
     void setUp() {
-        article = Article.builder().id(1L).title("TDD Tutorial").build();
-
-
+        user = User.builder().firstName("John").lastName("Doe").email("test@gmail.com").password("pwd").build();
+        Topic topic = Topic.builder().title("Test Topic").build();
+        article = Article.builder().id(1L).topic(topic).title("Tutorial JUnit").
+                content("Avec Maven ou  gradle, JUnit peut être facilement ajouté à votre projet")
+                .author(user).build();
     }
 
 
@@ -62,11 +70,6 @@ public class ArticleServiceTest {
 
     }
 
-    @Test
-    public void testGetAllCommentsByArticleId() {
-        Comment c1 = Comment.builder().text("Le TDD m'intéresse!").article(article).build();
-        article.getComments().add(c1);
 
-    }
 
 }

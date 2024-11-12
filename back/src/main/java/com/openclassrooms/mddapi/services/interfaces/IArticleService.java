@@ -11,6 +11,4 @@ public interface IArticleService {
 
     public Article create(Article article);
     public Article update(Long id, Article article) ;
-    public List<Comment> getAllComments(Long id) ;
-    public void addComment(Long id, Comment comment); ;
 }

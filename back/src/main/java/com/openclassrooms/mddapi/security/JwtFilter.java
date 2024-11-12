@@ -34,6 +34,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String path = request.getServletPath();
 
         if (path.equals("/api/auth/login") || path.equals("/api/auth/register")) {
+            System.out.println("Filter : register called");
             filterChain.doFilter(request, response);
             return;  // Continuer la chaîne sans vérification JWT pour ces routes
         }
