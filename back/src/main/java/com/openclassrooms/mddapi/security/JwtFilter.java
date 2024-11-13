@@ -12,6 +12,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +31,8 @@ public class JwtFilter extends OncePerRequestFilter {
     private final ApplicationContext context;
     private final JwtUtils jwtUtils;
 
+    private final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
+
 
 
     @Override
@@ -38,18 +42,20 @@ public class JwtFilter extends OncePerRequestFilter {
         String path = request.getServletPath();
 
         if (path.equals("/api/auth/login") || path.equals("/api/auth/register")) {
-            System.out.println("Filter : register called");
+            logger.debug("Filter : register called");
             filterChain.doFilter(request, response);
             return;  // Continuer la chaîne sans vérification JWT pour ces routes
         }
         String token = jwtUtils.extractTokenFromRequest(request);
         String email = null;
-        System.out.println("token: " + token);
+        logger.debug("token: " + token);
         if (token!=null && !token.isEmpty()){
             email = jwtServiceImpl.extractEmail(token);
         }
+        logger.debug("email: " + email);
+
         if (hasToBoAuthenticated(email)) {
-            System.out.println("login request: " + email);
+            logger.debug("check authentication: " + email);
             UserPrincipal userPrincipal = (UserPrincipal) context.
                     getBean(UserDetailsService.class).
                     loadUserByUsername(email);
@@ -78,6 +84,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
 
     private static boolean hasToBoAuthenticated(String username) {
-        return username != null && SecurityContextHolder.getContext().getAuthentication() == null;
+        return username == null || SecurityContextHolder.getContext().getAuthentication() == null;
     }
 }

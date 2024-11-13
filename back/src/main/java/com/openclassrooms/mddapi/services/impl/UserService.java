@@ -28,6 +28,8 @@ public class UserService implements IUserService {
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
     private UserMapper userMapper;
 
+
+
     public User getUserById(int id) {
         return userRepository.findById(id).orElse(null);
     }

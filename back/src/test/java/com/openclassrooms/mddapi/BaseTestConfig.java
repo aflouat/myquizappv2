@@ -16,15 +16,17 @@ public abstract class BaseTestConfig {
     protected static User userSubscriber;
     protected static Post post;
     protected static PostDto postDto;
+    protected static Topic topic;
     // Initialisation globale qui s'exécute une seule fois pour tous les tests
     @BeforeAll
     public static void globalSetUp() {
         userSubscriber = User.builder().id(1L).email("test@gmail.com").firstName("Joseph").lastName("Smith").password("pwd").build();
-        post.builder().title("Un livre sur typescript")
+        post = Post.builder().title("Un livre sur typescript")
                         .content("un langage orienté objet")
                 .topic(Topic.builder().subject("Java").build()).author(userSubscriber).build();
-        postDto.builder().title("Un livre sur typescript")
+        postDto = PostDto.builder().title("Un livre sur typescript")
                 .content("un langage orienté objet").topicSubject("Java").build();
+        topic = Topic.builder().subject("Java").build();
 
     }
 
