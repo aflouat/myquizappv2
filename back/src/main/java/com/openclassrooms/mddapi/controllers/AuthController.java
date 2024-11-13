@@ -9,7 +9,6 @@ import com.openclassrooms.mddapi.payload.response.MessageResponse;
 import com.openclassrooms.mddapi.repositories.UserRepository;
 import com.openclassrooms.mddapi.security.JwtUtils;
 import com.openclassrooms.mddapi.services.impl.JwtServiceImpl;
-import com.openclassrooms.mddapi.services.impl.MyUserDetailsServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -67,10 +66,11 @@ public class AuthController {
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getEmail(),
-                signUpRequest.getLastName(),
-                signUpRequest.getFirstName(),
-                passwordEncoder.encode(signUpRequest.getPassword()));
+
+        User user = User.builder().email(signUpRequest.getEmail()).firstName(signUpRequest.getFirstName())
+                .lastName(signUpRequest.getLastName()).
+                password(passwordEncoder.encode(signUpRequest.getPassword())).build();
+
 
         userRepository.save(user);
 

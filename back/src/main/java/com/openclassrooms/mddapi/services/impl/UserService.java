@@ -3,10 +3,14 @@ package com.openclassrooms.mddapi.services.impl;
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.models.User;
+import com.openclassrooms.mddapi.models.UserPrincipal;
 import com.openclassrooms.mddapi.repositories.UserRepository;
 
+import com.openclassrooms.mddapi.services.interfaces.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +18,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements IUserService {
+
+
+
     private final UserRepository userRepository;
     private final JwtServiceImpl jwtServiceImpl;
     private final AuthenticationManager authManager;

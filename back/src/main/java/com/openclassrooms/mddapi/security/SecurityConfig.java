@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -32,10 +33,11 @@ public class SecurityConfig {
 
         return http.cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://localhost:4200"));
-                    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-                    config.setAllowedHeaders(List.of("*"));
+
+                    config.setAllowedOriginPatterns(List.of("http://localhost:3001", "http://localhost:4200"));
                     config.setAllowCredentials(true);
+
+                    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
                     config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 
                     return config;
@@ -47,7 +49,7 @@ public class SecurityConfig {
                 authorizeHttpRequests(request -> request
                         .requestMatchers("/api/auth/login", "/api/auth/register", "/swagger-ui/**",
                                 "/v3/api-docs/**","/swagger-resources/**", "/swagger-ui.html",
-                                "/webjars/**", "/uploads/**").permitAll()
+                                "/webjars/**").permitAll()
                         .anyRequest().authenticated()).
                 sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

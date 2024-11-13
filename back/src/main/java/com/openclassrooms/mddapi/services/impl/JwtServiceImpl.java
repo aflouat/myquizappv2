@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.services.impl;
 
 
+import com.openclassrooms.mddapi.models.UserPrincipal;
 import com.openclassrooms.mddapi.services.interfaces.IJwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -76,9 +77,11 @@ public class JwtServiceImpl implements IJwtService {
                 .getPayload();
     }
 
-    public boolean hasTokenNotExpiredAndExistingUser(String token, UserDetails userDetails) {
+
+    @Override
+    public boolean hasTokenNotExpiredAndExistingUser(String token, UserPrincipal userPrincipal) {
         final String email = extractEmail(token);
-        return (email.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (email.equals(userPrincipal.getUsername()) && !isTokenExpired(token));
     }
 
     public boolean isTokenExpired(String token) {

@@ -1,9 +1,10 @@
 package com.openclassrooms.mddapi.services.impl;
 
+import com.openclassrooms.mddapi.models.Post;
 import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.repositories.CommentRepository;
+import com.openclassrooms.mddapi.services.interfaces.IPostService;
 import com.openclassrooms.mddapi.services.interfaces.ICommentService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +15,18 @@ import java.util.List;
 
 public class CommentService implements ICommentService {
     private final CommentRepository commentRepository;
+    private final IPostService postService;
 
-    public List<Comment> getComments() {
-        return commentRepository.findAll();
+    public List<Comment> getCommentsByPostId(Long postId) {
+        Post post = postService.getPostById(postId);
+        return commentRepository.findByPost(post);
     }
 
     @Override
-    public Comment create(Comment comment) {
-        return commentRepository.save(comment);
+    public Comment addCommentToPost(Comment comment, Long postId) {
+        Post postFromDb = postService.getPostById(postId);
+        comment.setPost(postFromDb);
+    return commentRepository.save(comment);
     }
 
 

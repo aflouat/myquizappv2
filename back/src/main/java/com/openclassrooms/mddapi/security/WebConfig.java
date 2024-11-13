@@ -34,12 +34,12 @@ public class WebConfig implements WebMvcConfigurer {
 
 
 
-    @Override
+ /*   @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
                 .allowedOrigins("http://localhost:4200/**")  // Autoriser votre front-end
                 .allowedMethods("GET", "POST", "PUT")
                 .allowedHeaders("*")
                 .allowCredentials(true);
-    }
+    }*/
 }

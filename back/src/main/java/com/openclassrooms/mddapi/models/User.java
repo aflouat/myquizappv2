@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -21,7 +22,6 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = {"id"})
 @Builder
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 @ToString
 public class User {
@@ -29,22 +29,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
+    @NotNull
     @Size(max = 50)
     @Email
     private String email;
 
-    @NonNull
+    @NotNull
     @Size(max = 20)
     @Column(name = "last_name")
     private String lastName;
 
-    @NonNull
+    @NotNull
     @Size(max = 20)
     @Column(name = "first_name")
     private String firstName;
 
-    @NonNull
+    @NotNull
     @Size(max = 120)
     private String password;
 
