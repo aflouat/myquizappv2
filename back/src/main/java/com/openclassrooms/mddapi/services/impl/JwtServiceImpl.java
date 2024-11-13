@@ -9,6 +9,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -25,18 +26,8 @@ import java.util.function.Function;
 public class JwtServiceImpl implements IJwtService {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtServiceImpl.class);
-    private String secretkey = "cedb81db8c25735d752de9a5d45e3dcafecdf1c3166ab5025ee36cb5176231b6";
-
-    public JwtServiceImpl() {
-
-        try {
-            KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
-            SecretKey sk = keyGen.generateKey();
-            secretkey = Base64.getEncoder().encodeToString(sk.getEncoded());
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    @Value("${jwt.secret}")
+    private String secretKey ;
 
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
@@ -55,12 +46,13 @@ public class JwtServiceImpl implements IJwtService {
     }
 
     public SecretKey getKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretkey);
+        byte[] keyBytes = Decoders.BASE64.decode(this.secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String extractEmail(String token) {
         // extract the email from jwt token
+
         return extractClaim(token, Claims::getSubject);
     }
 

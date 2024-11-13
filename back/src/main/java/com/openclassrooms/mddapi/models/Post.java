@@ -15,6 +15,7 @@ public class Post {
     private String title;
     @ManyToOne
     private User author;
+    @Lob
     private String content;
 
     @ManyToOne

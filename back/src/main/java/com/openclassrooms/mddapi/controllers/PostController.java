@@ -5,8 +5,11 @@ import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.models.Post;
 import com.openclassrooms.mddapi.services.impl.UserService;
 import com.openclassrooms.mddapi.services.interfaces.IPostService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,17 +20,21 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PostController implements IPostController {
 
+    Logger logger = LoggerFactory.getLogger(PostController.class);
+
     private final IPostService postService;
     private final PostMapper postMapper;
-    private final UserService userService;
+
     @Override
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody PostDto postDto) {
-            Post post = postService.create(
-                    this.postMapper.mapToPost(postDto));
+    public ResponseEntity<?> create(@Valid @RequestBody PostDto postDto, HttpServletRequest request) {
+
+        Post postToSave = this.postMapper.mapToPost(postDto,request);
+        logger.debug("Creating post: {}", postToSave);
+            Post savedPost = postService.create(postToSave );
            // User author = userService.fetchUserByToken()
 
-        return ResponseEntity.ok().body(this.postMapper.mapToPostDto(post));
+        return ResponseEntity.ok().body(savedPost);
     }
 
     @Override

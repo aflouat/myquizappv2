@@ -20,6 +20,7 @@ public class Comment{
 
         @NotNull
         @Size(min = 3)
+        @Lob
         String text;
 
         @ManyToOne
