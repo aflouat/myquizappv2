@@ -3,13 +3,11 @@ package com.openclassrooms.mddapi.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Builder
 @Data
 @AllArgsConstructor @NoArgsConstructor
 @Entity
-public class Article {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

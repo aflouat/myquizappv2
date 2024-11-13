@@ -1,20 +1,18 @@
 package com.openclassrooms.mddapi.services.impl;
 
-
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.models.UserPrincipal;
 import com.openclassrooms.mddapi.repositories.UserRepository;
-import com.openclassrooms.mddapi.services.interfaces.IMyUserDetailsService;
-
+import com.openclassrooms.mddapi.services.interfaces.IUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MyUserDetailsServiceImpl implements IMyUserDetailsService {
-
+public class UserDetailsServiceImpl implements IUserDetailsService {
     private final UserRepository userRepo;
 
     @Override
@@ -24,7 +22,7 @@ public class MyUserDetailsServiceImpl implements IMyUserDetailsService {
             System.out.println("User Not Found");
             throw new UsernameNotFoundException("user not found");
         }
-        
+
         return UserPrincipal.builder().id(user.getId())
                 .username(user.getEmail())
                 .password(user.getPassword())

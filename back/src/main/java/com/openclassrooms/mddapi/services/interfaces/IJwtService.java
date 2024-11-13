@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.services.interfaces;
 
 
+import com.openclassrooms.mddapi.models.UserPrincipal;
 import io.jsonwebtoken.Claims;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,7 +19,7 @@ public interface IJwtService {
 
     Claims extractAllClaims(String token);
 
-    boolean hasTokenNotExpiredAndExistingUser(String token, UserDetails userDetails);
+    boolean hasTokenNotExpiredAndExistingUser(String token, UserPrincipal userPrincipal);
 
     boolean isTokenExpired(String token);
 

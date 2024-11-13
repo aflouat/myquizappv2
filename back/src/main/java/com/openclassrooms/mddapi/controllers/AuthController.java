@@ -9,7 +9,6 @@ import com.openclassrooms.mddapi.payload.response.MessageResponse;
 import com.openclassrooms.mddapi.repositories.UserRepository;
 import com.openclassrooms.mddapi.security.JwtUtils;
 import com.openclassrooms.mddapi.services.impl.JwtServiceImpl;
-import com.openclassrooms.mddapi.services.impl.MyUserDetailsServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

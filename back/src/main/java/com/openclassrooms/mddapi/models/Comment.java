@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,6 +23,6 @@ public class Comment{
         String text;
 
         @ManyToOne
-        @JoinColumn(name = "article_id")
-        Article article;
+        @JoinColumn(name = "post_id")
+        Post post;
 }

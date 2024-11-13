@@ -1,16 +1,15 @@
 package com.openclassrooms.mddapi.dto;
 
+import com.openclassrooms.mddapi.models.Topic;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
+@Builder
 @Data
 @AllArgsConstructor @NoArgsConstructor
-public class ArticleDto {
-    private Long id;
+public class PostDto {
     private String title;
-    private String authorName;
     private String content;
-    private List<CommentDto> comments;
+    private String topicSubject;
 }
