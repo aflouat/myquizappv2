@@ -34,7 +34,7 @@ public class PostMapper {
         return postDto;
     }
 
-    List<PostDto> mapToPostDtoList(List<Post> posts){
+    public List<PostDto> mapToPostDtoList(List<Post> posts){
         return posts.stream().map(this::mapToPostDto).collect(Collectors.toList());
     }
 

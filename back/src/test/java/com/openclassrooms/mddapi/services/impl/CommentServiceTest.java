@@ -1,12 +1,10 @@
-package com.openclassrooms.mddapi.services;
+package com.openclassrooms.mddapi.services.impl;
 
 import com.openclassrooms.mddapi.models.Post;
 import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repositories.CommentRepository;
-import com.openclassrooms.mddapi.services.impl.PostService;
-import com.openclassrooms.mddapi.services.impl.CommentService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

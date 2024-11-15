@@ -24,12 +24,11 @@ public class PostService implements IPostService {
         return postRepository.findById(id).orElse(null);
     }
 
-    public Post create(Post post) {
-        Post postToSave = post;
+    public Post create(Post postToSave) {
+        Post savedPost=postRepository.save(postToSave);
 
 
-        postToSave = postRepository.save(postToSave);
-        return postRepository.save(post);
+         return savedPost;
     }
     public Post update(Long id, Post post) {
         post.setId(id);

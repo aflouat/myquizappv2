@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'front';
+  showHeader: boolean = true;
+
+  title = 'MDD';
+  constructor(private router: Router) {
+    // Abonnez-vous aux changements de route
+    this.router.events.subscribe(() => {
+      // Vérifiez si la route correspond à votre page landing
+      this.showHeader = !this.router.url.includes('/home');
+    });
+  }
 }

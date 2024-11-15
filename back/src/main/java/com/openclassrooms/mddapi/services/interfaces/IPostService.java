@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.services.interfaces;
 
+import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.models.Post;
 
 import java.util.List;

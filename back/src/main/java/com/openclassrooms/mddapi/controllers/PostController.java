@@ -41,14 +41,17 @@ public class PostController implements IPostController {
     public ResponseEntity<?> findById(String id) {
         return null;
     }
-
+    @PutMapping
     @Override
     public ResponseEntity<?> update(String id, PostDto postDto) {
         return null;
     }
 
+    @GetMapping
     @Override
     public ResponseEntity<?> findAll() {
-        return null;
+        return ResponseEntity.ok().body(
+                postMapper.mapToPostDtoList(
+                        postService.getAllPosts()));
     }
 }
