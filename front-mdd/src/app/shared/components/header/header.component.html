@@ -1,13 +1,30 @@
 <header>
-    <nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container d-flex justify-content-between align-items-center">
+      <!-- Logo à gauche -->
       <div class="logo">
-        <a href="/">
-          <img src="assets/logo_p6.png" alt="Logo MDD" width="150"/>
+        <a href="/home">
+          <img src="assets/logo_p6.png" alt="Logo MDD" width="150" />
         </a>
       </div>
-     
-    </nav>
-    <hr class="header-divider" />
-
-  </header>
-  
+      
+      <!-- Menu à droite -->
+      <div class="right-menu">
+        <ul class="navbar-nav d-flex flex-row align-items-center">
+          <li class="nav-item me-3">
+            <a class="nav-link" href="#">Articles</a>
+          </li>
+          <li class="nav-item me-3">
+            <a class="nav-link" href="/subscription/topics">Thèmes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/profile">
+              <img src="assets/user-picto.png" alt="User" width="40" />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <hr class="header-divider" />
+</header>

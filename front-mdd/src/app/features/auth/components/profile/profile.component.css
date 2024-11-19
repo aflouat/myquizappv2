@@ -1,0 +1,23 @@
+.profile-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .subscriptions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .subscription {
+    flex: 1 1 calc(50% - 15px);
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TopicService } from '../../services/topic.service';
 import { Topic } from '../../interfaces/topic.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 
 
 @Component({
@@ -16,6 +16,8 @@ export class TopicsComponent implements OnInit {
   errorMessage: string = '';
 
   constructor(private topicService: TopicService, private fb: FormBuilder) {
+    this.getTopics();
+
     // Initialisation du formulaire
     this.form = this.fb.group({
       subject: ['', Validators.required],
@@ -29,6 +31,7 @@ export class TopicsComponent implements OnInit {
 
   // Récupérer les topics
   getTopics(): void {
+    console.log('list topics call.....')
     this.topicService.getTopics().subscribe({
       next: (topics) => (this.topics = topics),
       error: (err) => (this.errorMessage = 'Erreur lors du chargement des topics.'),

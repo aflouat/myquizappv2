@@ -1,39 +1,7 @@
-<div class="container mt-5">
-    <h1 class="mb-4">Gestion des Topics</h1>
-  
-    <!-- Formulaire de création -->
-    <form (ngSubmit)="createTopic()">
-      <div class="mb-3">
-        <label for="subject" class="form-label">Sujet</label>
-        <input type="text" id="subject" class="form-control" formControlName="subject" />
-        <div class="text-danger" *ngIf="form.get('subject')?.invalid && form.get('subject')?.touched">
-          Le sujet est requis.
-        </div>
-      </div>
-  
-      <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea id="description" class="form-control" formControlName="description"></textarea>
-        <div class="text-danger" *ngIf="form.get('description')?.invalid && form.get('description')?.touched">
-          La description est requise.
-        </div>
-      </div>
-  
-      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Créer un Topic</button>
-    </form>
-  
-    <!-- Liste des topics -->
-    <div class="mt-5">
-      <h2>Liste des Topics</h2>
-      <ul class="list-group">
-        <li *ngFor="let topic of topics" class="list-group-item">
-          <h5>{{ topic.subject }}</h5>
-          <p>{{ topic.description }}</p>
-        </li>
-      </ul>
-    </div>
-  
-    <!-- Message d'erreur -->
-    <div class="text-danger mt-3" *ngIf="errorMessage">{{ errorMessage }}</div>
+<div class="topics-container">
+  <div class="topic-card" *ngFor="let topic of topics">
+    <h3>{{ topic.subject }}</h3>
+    <p>{{ topic.description }}</p>
+    <button mat-raised-button color="primary">S'abonner</button>
   </div>
-  
+</div>

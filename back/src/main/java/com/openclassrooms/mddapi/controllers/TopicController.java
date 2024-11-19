@@ -30,8 +30,7 @@ public class TopicController {
 
     @GetMapping
     public ResponseEntity<?> getAllTopics() {
-        List<Topic> topicList = topicService.findAll();
-        List<TopicDto> topicDtoList = topicList.stream().map(topicMapper::toDto).collect(Collectors.toList());
+        List<TopicDto> topicDtoList = topicService.findAll();
         return ResponseEntity.ok().body(topicDtoList);
     }
 

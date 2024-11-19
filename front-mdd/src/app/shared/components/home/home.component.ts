@@ -16,12 +16,12 @@ export class HomeComponent {
 
   login() {
     console.log('login.....');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
 
   }
   register() {
     console.log('register.....');
-    this.router.navigate(['/register']);
+    this.router.navigate(['/auth/register']);
 
   }
 
