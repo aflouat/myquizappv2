@@ -9,7 +9,7 @@ export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' }, // Route par défaut
     { path: 'home',     canActivate: [UnauthGuard],
         component: HomeComponent },
-    { path: 'auth',     canActivate: [UnauthGuard],
+    { path: 'auth',    
         loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
     { path: 'subscription',     canActivate: [AuthGuard],
         loadChildren: () => import('./features/topic/topic.module').then(m => m.TopicModule) },
