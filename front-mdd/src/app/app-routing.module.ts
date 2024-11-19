@@ -1,16 +1,19 @@
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './shared/components/home/home.component';
-import { LoginComponent } from './features/auth/components/login/login.component';
-import { TopicsComponent } from './features/topic/components/topics/topics.component';
-import { RegisterComponent } from './features/auth/components/register/register.component';
+
 import { NgModule } from '@angular/core';
+import { UnauthGuard } from './guards/unauth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' }, // Route par défaut
-    { path: 'home', component: HomeComponent },
-    {path:'login',component:LoginComponent},
-    {path:'register', component:RegisterComponent},
-    {path:'topics',component:TopicsComponent}
+    { path: 'home',     canActivate: [UnauthGuard],
+        component: HomeComponent },
+    { path: 'auth',     canActivate: [UnauthGuard],
+        loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
+    { path: 'subscription',     canActivate: [AuthGuard],
+        loadChildren: () => import('./features/topic/topic.module').then(m => m.TopicModule) },
+
 
 
 ];

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterRequest } from '../../loginRequest.interface.ts/registerRequest.interface';
+import { AuthService } from '../../services/auth.service';
+import { SessionService } from '../../../../shared/services/session.service';
+import { passwordValidator } from '../../auth.module';
 
 @Component({
   selector: 'app-register',
@@ -9,26 +12,37 @@ import { RegisterRequest } from '../../loginRequest.interface.ts/registerRequest
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-  form!: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router) {}
+  public onError = false;
+  public form!:FormGroup ;
+  constructor(private fb: FormBuilder, private router: Router,private authService:AuthService,
+    private sessionService:SessionService
+  ) {}
+public ngOnInit(): void {
+  this.form = this.fb.group({
+    
+    password: [
+      '',
+      [
+        Validators.required,
+        passwordValidator,
+      ]
+    ]
+  });
 
-  ngOnInit(): void {
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-    }
+
+}
+  
+
+
 
   onSubmit(): void {
     if (this.form.valid) {
       console.log('Form Submitted', this.form.value);
       const registerRequest = this.form.value as RegisterRequest;
-    /*  this.authService.login(loginRequest).subscribe({
-        next: (response: SessionInformation) => {
-          this.sessionService.logIn(response);
-          this.router.navigate(['/topics']);
-        },
-      });*/
+     this.authService.register(registerRequest).subscribe({
+      next: () => this.router.navigate(['/auth/login']),
+      error: () => this.onError = true,
+      });
     }
   }
 

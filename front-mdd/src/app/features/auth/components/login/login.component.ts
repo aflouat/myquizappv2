@@ -15,7 +15,9 @@ import { SessionService } from '../../../../shared/services/session.service';
 export class LoginComponent implements OnInit {
 
   form!: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router,private authService:AuthService,
+    private sessionService:SessionService
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -28,12 +30,14 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       console.log('Form Submitted', this.form.value);
       const loginRequest = this.form.value as LoginRequest;
-    /*  this.authService.login(loginRequest).subscribe({
+     this.authService.login(loginRequest).subscribe({
         next: (response: SessionInformation) => {
+          localStorage.setItem('token', response.token); 
+
           this.sessionService.logIn(response);
-          this.router.navigate(['/topics']);
+          this.router.navigate(['subscription/topics']);
         },
-      });*/
+      });
     }
   }
 

@@ -14,7 +14,7 @@ export class AppComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Masquer le header uniquement pour la route '/home'
-        this.showHeader = event.url !== '/home';
+        this.showHeader = event.url !== '/';
       }
     });
   }

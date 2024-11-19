@@ -5,3 +5,7 @@
     margin: 0; /* Supprime les marges par défaut */
     width: 100%; /* S'étend sur toute la largeur */
   }
+
+  .right-menu{
+    float: right;
+  }
