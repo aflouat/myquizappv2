@@ -1,0 +1,43 @@
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginRequest } from '../../loginRequest.interface.ts/auth.interface';
+import { AuthService } from '../../services/auth.service';
+import { SessionInformation } from '../../../../shared/interfaces/sessionInformation.interface';
+import { SessionService } from '../../../../shared/services/session.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css',
+})
+export class LoginComponent implements OnInit {
+
+  form!: FormGroup;
+  constructor(private fb: FormBuilder, private router: Router) {}
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+    }
+
+  onSubmit(): void {
+    if (this.form.valid) {
+      console.log('Form Submitted', this.form.value);
+      const loginRequest = this.form.value as LoginRequest;
+    /*  this.authService.login(loginRequest).subscribe({
+        next: (response: SessionInformation) => {
+          this.sessionService.logIn(response);
+          this.router.navigate(['/topics']);
+        },
+      });*/
+    }
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']); // Retourne à la page précédente ou d'accueil
+  }
+}

@@ -1,0 +1,53 @@
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+    <div class="w-100 d-flex align-items-center mb-4" style="position: relative;">
+      <!-- Flèche de retour -->
+      <button class="btn p-0 back-arrow" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i>
+      </button>
+      <!-- Titre -->
+      <h2 class="mx-auto text-center">Inscription</h2>
+    </div>
+    <div class="card p-4 border-0" style="max-width: 400px; width: 100%;">
+      <form  (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="email" class="form-label">Nom d'utilisateur</label>
+          <input 
+            type="text"
+            id="username"
+            formControlName="username"
+            class="form-control"    />
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Adresse e-mail</label>
+            <input
+              type="text"
+              id="email"
+              formControlName="email"
+              class="form-control"
+            />
+          </div>
+  
+        <div class="mb-3">
+          <label for="password" class="form-label">Mot de passe</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control"
+          />
+          <div class="text-danger" *ngIf="form.get('password')?.hasError('complexity')">
+            Le mot de passe doit contenir au moins 8 caractères, une majuscule et un chiffre.
+          </div>
+        </div>
+  
+        <button
+          type="submit"
+          class="custom-button"
+          
+        >
+          S'inscrire
+        </button>
+      </form>
+    </div>
+  </div>
+  
