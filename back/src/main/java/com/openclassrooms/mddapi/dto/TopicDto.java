@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TopicDto {
+    private Long id;
     private String subject;
     private String description;
 }

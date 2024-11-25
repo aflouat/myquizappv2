@@ -5,6 +5,7 @@ import com.openclassrooms.mddapi.mapper.TopicMapper;
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.services.impl.TopicService;
 import com.openclassrooms.mddapi.services.interfaces.ITopicService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +23,7 @@ public class TopicController {
 
     @PostMapping
     public ResponseEntity<?> createTopic(@RequestBody final TopicDto topicDto) {
-        return ResponseEntity.ok().body(topicService.create(
-                topicMapper.toEntity(topicDto)
-        ));
+        return ResponseEntity.ok().body(topicService.create(topicDto));
 
     }
 
@@ -33,6 +32,8 @@ public class TopicController {
         List<TopicDto> topicDtoList = topicService.findAll();
         return ResponseEntity.ok().body(topicDtoList);
     }
+
+
 
 
 }

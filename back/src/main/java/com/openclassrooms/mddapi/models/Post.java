@@ -2,6 +2,9 @@ package com.openclassrooms.mddapi.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
 
 @Builder
 @Data
@@ -21,6 +24,8 @@ public class Post {
     @ManyToOne
     private Topic topic;
 
-
+    @CreatedDate
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
 
 }

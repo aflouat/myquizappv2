@@ -11,20 +11,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
-    private Long id;
 
-    @NonNull
-    @Size(max = 50)
     @Email
     private String email;
 
-    @NonNull
-    @Size(max = 20)
-    private String lastName;
+    private String username;
 
-    @NonNull
-    @Size(max = 20)
-    private String firstName;
+
 
 
 

@@ -33,7 +33,7 @@ public class SecurityConfig {
 
         return http.cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://localhost:4200"));
+                    config.setAllowedOrigins(List.of("http://localhost:4200","http://localhost:3001"));
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     config.setAllowedHeaders(List.of("*"));
                     config.setAllowCredentials(true);
@@ -47,7 +47,8 @@ public class SecurityConfig {
                 authorizeHttpRequests(request -> request
                         .requestMatchers("/api/auth/login", "/api/auth/register", "/swagger-ui/**",
                                 "/v3/api-docs/**","/swagger-resources/**", "/swagger-ui.html",
-                                "/webjars/**").permitAll()
+                                "/webjars/**","/error").permitAll()
+
                         .anyRequest().authenticated()).
                 sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

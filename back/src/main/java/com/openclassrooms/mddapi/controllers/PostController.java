@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.controllers;
 
+import com.openclassrooms.mddapi.dto.CommentDto;
 import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.models.Post;
@@ -18,40 +19,30 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/post")
 @RequiredArgsConstructor
-public class PostController implements IPostController {
+public class PostController  {
 
-    Logger logger = LoggerFactory.getLogger(PostController.class);
 
     private final IPostService postService;
-    private final PostMapper postMapper;
 
-    @Override
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody PostDto postDto, HttpServletRequest request) {
 
-        Post postToSave = this.postMapper.mapToPost(postDto,request);
-        logger.debug("Creating post: {}", postToSave);
-            Post savedPost = postService.create(postToSave );
-           // User author = userService.fetchUserByToken()
+            PostDto savedPostDto = postService.create(postDto );
 
-        return ResponseEntity.ok().body(savedPost);
+        return ResponseEntity.ok().body(savedPostDto);
     }
 
-    @Override
-    public ResponseEntity<?> findById(String id) {
-        return null;
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(postService.getPostById(id));
     }
-    @PutMapping
-    @Override
-    public ResponseEntity<?> update(String id, PostDto postDto) {
-        return null;
-    }
+
 
     @GetMapping
-    @Override
-    public ResponseEntity<?> findAll() {
-        return ResponseEntity.ok().body(
-                postMapper.mapToPostDtoList(
-                        postService.getAllPosts()));
+    public ResponseEntity<?> getAllFeeds() {
+        return ResponseEntity.ok().body(postService.findAllFeeds());
     }
+
+
+
 }

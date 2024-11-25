@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.services.impl;
 
 
-import com.openclassrooms.mddapi.models.UserPrincipal;
 import com.openclassrooms.mddapi.services.interfaces.IJwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -10,13 +9,9 @@ import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +45,7 @@ public class JwtServiceImpl implements IJwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String extractEmail(String token) {
+    public String extractIdentifier(String token) {
         // extract the email from jwt token
 
         return extractClaim(token, Claims::getSubject);
@@ -71,9 +66,9 @@ public class JwtServiceImpl implements IJwtService {
 
 
     @Override
-    public boolean hasTokenNotExpiredAndExistingUser(String token, UserPrincipal userPrincipal) {
-        final String email = extractEmail(token);
-        return (email.equals(userPrincipal.getUsername()) && !isTokenExpired(token));
+    public boolean hasTokenNotExpired(String token) {
+
+        return  !isTokenExpired(token);
     }
 
     public boolean isTokenExpired(String token) {

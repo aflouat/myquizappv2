@@ -11,6 +11,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "USERS", uniqueConstraints = {
@@ -35,14 +36,10 @@ public class User {
     private String email;
 
     @NotNull
-    @Size(max = 20)
-    @Column(name = "last_name")
-    private String lastName;
+    @Size(max = 50)
 
-    @NotNull
-    @Size(max = 20)
-    @Column(name = "first_name")
-    private String firstName;
+    private String username;
+
 
     @NotNull
     @Size(max = 120)
@@ -55,5 +52,7 @@ public class User {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+
 
 }

@@ -37,6 +37,10 @@ export class SessionService {
     this.sessionInformation = undefined;
     this.isLogged = false;
     this.next();
+    localStorage.setItem('user', '');
+    localStorage.setItem('token', '');
+
+
   }
 
   private next(): void {

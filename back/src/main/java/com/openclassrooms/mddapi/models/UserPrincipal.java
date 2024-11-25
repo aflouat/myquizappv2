@@ -22,9 +22,8 @@ public class UserPrincipal implements UserDetails {
 
     private String username;
 
-    private String firstName;
+    private String email;
 
-    private String lastName;
 
 
     @JsonIgnore

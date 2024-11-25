@@ -13,6 +13,7 @@ import org.mapstruct.factory.Mappers;
 public interface TopicMapper {
 
     TopicMapper INSTANCE = Mappers.getMapper(TopicMapper.class);
+    //@Mapping(target = "id", source = "id") // Mappage explicite de l'ID
 
     TopicDto toDto(Topic topic);
 

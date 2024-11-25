@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.mapper;
 
 import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.models.Post;
+import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.security.JwtUtils;
 import com.openclassrooms.mddapi.services.impl.PostService;
@@ -22,15 +23,14 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class PostMapper {
-    private final TopicService topicService;
-    private final UserService userService;
-    private final JwtUtils jwtUtils;
 
-    PostDto mapToPostDto(Post post){
+    public PostDto mapToPostDto(Post post){
         PostDto postDto = PostDto.builder()
                 .content(post.getContent())
                 .title(post.getTitle())
-                .topicSubject(post.getTopic().getSubject()).build();
+                .topicSubject(post.getTopic().getSubject())
+                .createdAt(post.getCreatedAt())
+                .build();
         return postDto;
     }
 
@@ -39,15 +39,15 @@ public class PostMapper {
     }
 
 
-    public Post mapToPost(PostDto postDto, HttpServletRequest request){
-        String token = jwtUtils.extractTokenFromRequest(request);
+    public Post mapToPost(PostDto postDto){
+        Topic topic = Topic.builder().subject(postDto.getTopicSubject()).build();
 
-        User authorFound = userService.fetchUserByToken(token);
         Post post = Post.builder()
                 .title(postDto.getTitle())
                 .content(postDto.getContent())
-                .topic(topicService.findBySubject(postDto.getTopicSubject()))
-                .author(authorFound).build();
+                .topic(topic)
+                .createdAt(postDto.getCreatedAt())
+                .build();
         return post;
     }
 }

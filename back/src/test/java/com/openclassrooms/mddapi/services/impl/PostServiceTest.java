@@ -1,11 +1,12 @@
 package com.openclassrooms.mddapi.services.impl;
 
-import com.openclassrooms.mddapi.BaseTestConfig;
 import com.openclassrooms.mddapi.dto.PostDto;
+import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.models.Post;
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repositories.PostRepository;
+import com.openclassrooms.mddapi.services.interfaces.IUserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.test.context.support.WithMockUser;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,10 @@ public class PostServiceTest  {
 
     @Mock
     PostRepository postRepository;
+    @Mock
+    PostMapper postMapper;
+    @Mock
+    IUserService userService;
 
 
     @InjectMocks
@@ -34,12 +39,12 @@ public class PostServiceTest  {
     protected static Post post;
     protected  static PostDto postDto;
     protected  static Topic topic;
-    {}
+
     @BeforeEach
     void setUp() {
         {
-            userSubscriber = User.builder().id(1L).email("test@gmail.com").firstName("Joseph").lastName("Smith").password("pwd").build();
-            post = Post.builder().title("Un livre sur typescript")
+            userSubscriber = User.builder().id(1L).email("test@gmail.com").username("Joseph").password("pwd").build();
+            post = Post.builder().id(1L).title("Un livre sur typescript")
                     .content("un langage orienté objet")
                     .topic(Topic.builder().subject("Java").build()).author(userSubscriber).build();
             postDto = PostDto.builder().title("Un livre sur typescript")
@@ -58,8 +63,9 @@ public class PostServiceTest  {
     @Test
     public void testGetPostById() {
         when(postRepository.findById(1L)).thenReturn(Optional.of(post));
-        Post foundPost = postService.getPostById(1L);
-        Assertions.assertEquals(post, foundPost);
+        when(postMapper.mapToPostDto(post)).thenReturn(postDto);
+        PostDto foundPost = postService.getPostById(1L);
+        Assertions.assertEquals(postDto, foundPost);
         verify(postRepository,times(1)).findById(1L);
 
     }
@@ -78,12 +84,22 @@ public class PostServiceTest  {
     }
 
     @Test
+    @WithMockUser
     public void testCreate_OK() {
+        when(postMapper.mapToPost(postDto)).thenReturn(post);
+        when(userService.getConnectedUser()).thenReturn(userSubscriber);
         when(postRepository.save(post)).thenReturn(post);
-        Post actualPost = postService.create(post);
+        when(postMapper.mapToPostDto(post)).thenReturn(postDto);
+
+        // Appelle la méthode à tester
+        PostDto actualPost = postService.create(postDto);
+
+        // Vérifications
         Assertions.assertNotNull(actualPost);
-        verify(postRepository,times(1)).save(post);
-        Assertions.assertEquals(post, actualPost);
+        Assertions.assertEquals(postDto, actualPost);
+        verify(postRepository, times(1)).save(post);
+        verify(postMapper, times(1)).mapToPost(postDto);
+        verify(postMapper, times(1)).mapToPostDto(post);
     }
 
 
