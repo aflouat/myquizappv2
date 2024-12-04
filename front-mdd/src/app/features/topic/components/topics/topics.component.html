@@ -2,6 +2,6 @@
   <div class="topic-card" *ngFor="let topic of topics">
     <h3>{{ topic.subject }}</h3>
     <p>{{ topic.description }}</p>
-    <button mat-raised-button color="primary">S'abonner</button>
+    <button *ngIf="!topic.userSubscribed" mat-raised-button color="primary" (click)="subscribe(topic.id)">S'abonner</button>
   </div>
 </div>

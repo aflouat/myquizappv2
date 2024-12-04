@@ -13,4 +13,6 @@ public class TopicDto {
     private Long id;
     private String subject;
     private String description;
+    private boolean isUserSubscribed;
+
 }

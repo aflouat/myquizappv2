@@ -13,6 +13,10 @@ export const routes: Routes = [
         loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
     { path: 'subscription',     canActivate: [AuthGuard],
         loadChildren: () => import('./features/topic/topic.module').then(m => m.TopicModule) },
+        
+        { path:'post', canActivate:[AuthGuard],
+            loadChildren:() => import('./features/post/post.module').then(m =>m.PostModule)
+        }
 
 
 

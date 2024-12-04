@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginRequest } from '../../loginRequest.interface.ts/auth.interface';
+import { LoginRequest } from '../../interfaces/login-request';
 import { AuthService } from '../../services/auth.service';
-import { SessionInformation } from '../../../../shared/interfaces/sessionInformation.interface';
+import { SessionInformation } from '../../../../shared/interfaces/session-information.interface';
 import { SessionService } from '../../../../shared/services/session.service';
 
 @Component({

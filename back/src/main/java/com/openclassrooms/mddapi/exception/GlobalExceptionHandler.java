@@ -26,5 +26,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleRuntimeException(Exception ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
-    // Vous pouvez ajouter d'autres gestionnaires pour différentes exceptions ici
-}
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> handleCommentNotFoundException(NotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }}

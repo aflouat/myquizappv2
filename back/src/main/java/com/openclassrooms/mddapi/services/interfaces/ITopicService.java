@@ -10,5 +10,5 @@ public interface ITopicService {
     public TopicDto create(TopicDto topic);
     public List<TopicDto> findAll();
     public Topic findById(Long id);
-
+    public Topic findBySubject(String subject);
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { SessionInformation } from '../interfaces/sessionInformation.interface';
+import { SessionInformation } from '../interfaces/session-information.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -29,9 +29,15 @@ export class TopicService {
     return this.http.get<Topic[]>(this.apiUrl, { headers: this.getHeaders() });
 
   }
+    // Liste des topics (GET)
+    getSubscribedTopics(): Observable<Topic[]> {
+      return this.http.get<Topic[]>(this.baseUrl+'subscription', { headers: this.getHeaders() });
+  
+    }
 
-  // Création d'un topic (POST)
-  createTopic(topic: Topic): Observable<Topic> {
-    return this.http.post<Topic>(this.apiUrl, topic, { headers: this.getHeaders() });
+  // Abonnement à un topic
+  subscribeUserToTopic(idTopic: number): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}subscription/${idTopic}`, {}, { headers: this.getHeaders() });
   }
+  
 }

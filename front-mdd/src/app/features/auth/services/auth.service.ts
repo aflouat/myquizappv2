@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoginRequest } from '../loginRequest.interface.ts/auth.interface';
-import { RegisterRequest } from '../loginRequest.interface.ts/registerRequest.interface';
-import { SessionInformation } from '../../../shared/interfaces/sessionInformation.interface';
+import { LoginRequest } from '../interfaces/login-request';
+import { RegisterRequest } from '../interfaces/register-request.interface';
+import { SessionInformation } from '../../../shared/interfaces/session-information.interface';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({

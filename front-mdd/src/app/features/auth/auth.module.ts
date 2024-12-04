@@ -17,12 +17,13 @@ import { AuthRoutingModule } from './auth-routing.module';
     ProfileComponent
   ],
   imports: [
-    ReactiveFormsModule,CommonModule,AuthRoutingModule
+    ReactiveFormsModule,CommonModule,AuthRoutingModule,TopicModule
   ],
 })
 export class AuthModule { }
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
+import { TopicModule } from '../topic/topic.module';
 
 export function passwordValidator(control: AbstractControl): ValidationErrors | null {
   const password = control.value;

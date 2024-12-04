@@ -1,5 +1,5 @@
 <div class="profile-container">
-    <h2>Profil utilisateur</h2>
+    <h2 class="text-center">Profil utilisateur</h2>
     
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
@@ -14,18 +14,16 @@
       
       <button type="submit" class="btn btn-primary">Sauvegarder</button>
     </form>
+
+      <a class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover pointer-link"
+       (click)="logout()">Se déconnecter</a>
     
-    <button class="btn btn-danger mt-3" (click)="logout()">Se déconnecter</button>
   
     <hr class="divider" />
-  
-    <h3>Abonnements</h3>
-    <div class="subscriptions">
-      <div class="subscription" *ngFor="let subscription of subscriptions">
-        <h4>{{ subscription.title }}</h4>
-        <p>{{ subscription.description }}</p>
-        <button class="btn btn-outline-secondary" (click)="unsubscribe(subscription.id)">Se désabonner</button>
-      </div>
-    </div>
-  </div>
+    <h2 class="text-center">Abonnements</h2>
+
+       
+      <app-topics [showSubscribedOnly]="true"></app-topics>
+
+   </div>
   

@@ -14,18 +14,11 @@ public class UserDto {
 
     @Email
     private String email;
-
     private String username;
-
-
-
-
 
     @JsonIgnore
     @Size(max = 120)
     private String password;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 }

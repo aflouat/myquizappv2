@@ -8,7 +8,7 @@
       <h2 class="mx-auto text-center">Inscription</h2>
     </div>
     <div class="card p-4 border-0" style="max-width: 400px; width: 100%;">
-      <form  (ngSubmit)="onSubmit()">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <label for="email" class="form-label">Nom d'utilisateur</label>
           <input 
@@ -43,7 +43,7 @@
   
         <button
           type="submit"
-          class="custom-button" [disabled]="form.invalid"
+          class="custom-button" 
           
         >
           S'inscrire

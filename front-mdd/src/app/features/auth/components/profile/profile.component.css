@@ -20,4 +20,6 @@
     padding: 15px;
     border-radius: 5px;
   }
-  
+  .pointer-link {
+    cursor: pointer;
+  }

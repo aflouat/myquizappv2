@@ -7,6 +7,7 @@ import com.openclassrooms.mddapi.models.Subscription;
 import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repositories.SubscriptionRepository;
+import com.openclassrooms.mddapi.repositories.TopicRepository;
 import com.openclassrooms.mddapi.services.interfaces.ISubscriptionService;
 import com.openclassrooms.mddapi.services.interfaces.ITopicService;
 import com.openclassrooms.mddapi.services.interfaces.IUserService;
@@ -28,6 +29,7 @@ public class SubscriptionService implements ISubscriptionService {
     private final IUserService userService;
     private final SubscriptionRepository subscriptionRepository;
     private final TopicMapper topicMapper;
+    private final TopicRepository topicRepository;
 
     Logger logger = LoggerFactory.getLogger(SubscriptionService.class);
     @Override
@@ -65,16 +67,38 @@ public class SubscriptionService implements ISubscriptionService {
     }
 
     @Override
-    public List<TopicDto> getSubscribedTopics() {
+    public List<TopicDto> getAllTopicsWithSubscriptionStatusForCurrentUser() {
+        User currentUser = userService.getConnectedUser();
+        // Récupérer les IDs des topics auxquels l'utilisateur est abonné
+        List<Long> subscribedTopicIds = subscriptionRepository.findByUserId(currentUser.getId())
+                .stream()
+                .map(subscription -> subscription.getTopic().getId())
+                .toList();
+        List<Topic> topicList = topicRepository.findAll();
+
+        List<TopicDto> topicDtoList = topicList.stream().map(topic -> {
+            TopicDto topicDto = topicMapper.toDto(topic);
+            topicDto.setUserSubscribed(subscribedTopicIds.contains(topic.getId()));
+
+            return topicDto;
+        }).toList();
+
+        return topicDtoList;
+    }
+
+    @Override
+    public List<TopicDto> getAllSubscribedTopics() {
         User currentUser = userService.getConnectedUser();
         List<Subscription> subscriptionList = subscriptionRepository.findByUserId(currentUser.getId());
 
+        return subscriptionList.stream()
+                .map(subscription -> {
 
-        List<TopicDto> topicDtoList = new ArrayList<>();
-        for (Subscription subscription : subscriptionList) {
-            topicDtoList.add(topicMapper.toDto(subscription.getTopic()));
-        }
-        return topicDtoList;
+                    TopicDto topicDto = topicMapper.toDto(subscription.getTopic());
+                    topicDto.setUserSubscribed(true);
+                    return topicDto;
+                })
+                .toList();
     }
 
 

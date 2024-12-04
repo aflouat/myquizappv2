@@ -7,6 +7,6 @@ import java.util.List;
 public interface ISubscriptionService {
     public void subscribe(Long idTopic);
     public void unSubscribe(Long idTopic);
-    List<TopicDto> getSubscribedTopics();
-
+    List<TopicDto> getAllTopicsWithSubscriptionStatusForCurrentUser();
+    public List<TopicDto> getAllSubscribedTopics();
 }

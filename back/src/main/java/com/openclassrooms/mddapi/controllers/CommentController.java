@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.controllers;
 
 import com.openclassrooms.mddapi.dto.CommentDto;
-import com.openclassrooms.mddapi.services.impl.CommentService;
 import com.openclassrooms.mddapi.services.interfaces.ICommentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +19,10 @@ public class CommentController {
     public ResponseEntity<?> comment(@Valid @RequestBody CommentDto commentDto) {
             commentService.commentToPost(commentDto);
         return ResponseEntity.ok().body("Commentaire soumis!");
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getComments(@PathVariable Long postId) {
+        return ResponseEntity.ok().body(commentService.getAllCommentsByPostId(postId));
     }
 }

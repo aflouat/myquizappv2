@@ -26,6 +26,7 @@ public class PostMapper {
 
     public PostDto mapToPostDto(Post post){
         PostDto postDto = PostDto.builder()
+                .id(post.getId())
                 .content(post.getContent())
                 .title(post.getTitle())
                 .topicSubject(post.getTopic().getSubject())

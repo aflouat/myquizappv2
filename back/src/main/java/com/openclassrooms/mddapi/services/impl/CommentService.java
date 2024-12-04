@@ -34,8 +34,14 @@ public class CommentService implements ICommentService {
 
     }
 
+    @Override
+    public List<CommentDto> getAllCommentsByPostId(Long postId) {
+        List<CommentDto> commentDtoList = commentMapper.toDtoList(
+                commentRepository.findByPostId(postId)
+        );
 
-
+        return commentDtoList;
+    }
 
 
 }

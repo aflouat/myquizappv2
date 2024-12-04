@@ -1,22 +1,15 @@
 package com.openclassrooms.mddapi.services.impl;
 
-import com.openclassrooms.mddapi.dto.CommentDto;
 import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.dto.TopicDto;
-import com.openclassrooms.mddapi.mapper.CommentMapper;
 import com.openclassrooms.mddapi.mapper.PostMapper;
-import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.models.Post;
+import com.openclassrooms.mddapi.models.Topic;
 import com.openclassrooms.mddapi.repositories.PostRepository;
-import com.openclassrooms.mddapi.repositories.CommentRepository;
-import com.openclassrooms.mddapi.services.interfaces.ICommentService;
-import com.openclassrooms.mddapi.services.interfaces.IPostService;
-import com.openclassrooms.mddapi.services.interfaces.ISubscriptionService;
-import com.openclassrooms.mddapi.services.interfaces.IUserService;
+import com.openclassrooms.mddapi.services.interfaces.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.LoggerFactoryFriend;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +23,7 @@ public class PostService implements IPostService {
     private final PostRepository postRepository;
     private final PostMapper postMapper;
     private final IUserService userService;
+    private final ITopicService topicService;
 
     private final ISubscriptionService subscriptionService;
 
@@ -42,7 +36,7 @@ public class PostService implements IPostService {
 
     @Override
     public List<PostDto> findAllFeeds() {
-        List<TopicDto> topicDtoList = subscriptionService.getSubscribedTopics();
+        List<TopicDto> topicDtoList = subscriptionService.getAllTopicsWithSubscriptionStatusForCurrentUser();
         List<PostDto> postDtoList = new ArrayList<>();
         for (TopicDto topicDto : topicDtoList) {
             postDtoList.addAll(
@@ -64,9 +58,10 @@ public class PostService implements IPostService {
     }
 
     public PostDto create(PostDto postDtoSave) {
-
+        Topic foundTopic = topicService.findBySubject(postDtoSave.getTopicSubject());
         Post postToSave = this.postMapper.mapToPost(postDtoSave);
         postToSave.setAuthor(userService.getConnectedUser());
+        postToSave.setTopic(foundTopic);
         logger.debug("Creating post: {}", postToSave);
 
         Post savedPost=postRepository.save(postToSave);
@@ -74,10 +69,16 @@ public class PostService implements IPostService {
 
          return postMapper.mapToPostDto(savedPost);
     }
-    public Post update(Long id, Post post) {
-        post.setId(id);
-       return postRepository.save(post);
+
+
+    @Override
+    public void createBulk(List<PostDto> postDtoList) {
+        for (PostDto postDto : postDtoList) {
+            this.create(postDto);
+        }
+
     }
+
     @Override
     public Post findById(Long id) {
         Post post = postRepository.findById(id).orElse(null);

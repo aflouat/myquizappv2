@@ -7,5 +7,6 @@ import { TopicRoutingModule } from './topic-routing.module';
 @NgModule({
   declarations: [TopicsComponent],
   imports: [ReactiveFormsModule,CommonModule,TopicRoutingModule], // Ajout de CommonModule
+  exports: [TopicsComponent], 
 })
 export class TopicModule {}

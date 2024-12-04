@@ -9,3 +9,6 @@
   .right-menu{
     float: right;
   }
+  .logo img {
+    max-width: 150px;
+  }

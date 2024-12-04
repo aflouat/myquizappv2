@@ -13,6 +13,6 @@ public interface IPostService {
 
 
     public PostDto create(PostDto postDto) ;
-    public Post update(Long id, Post post) ;
 
+    public void createBulk(List<PostDto> postDtoList);
 }

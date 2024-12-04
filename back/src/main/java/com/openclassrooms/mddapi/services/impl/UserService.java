@@ -55,14 +55,8 @@ public class UserService implements IUserService {
         String jwt = jwtServiceImpl.generateToken(loginRequest.getIdentifier());
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         String connectedUserEmail = userRepository.findByUsername(userPrincipal.getUsername()).getEmail();
-
-
-
-//TODO adapt with credentials username or connectedUserEmail
         return JwtResponse.builder().id(userPrincipal.getId()).email(connectedUserEmail).
                 username(userPrincipal.getUsername()).token(jwt).build();
-
-
     }
 
     public User findUserByIdentifier(String identifier) {

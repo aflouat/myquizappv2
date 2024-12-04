@@ -31,6 +31,8 @@ public class PostServiceTest  {
     PostMapper postMapper;
     @Mock
     IUserService userService;
+    @Mock
+    TopicService topicService;
 
 
     @InjectMocks
@@ -90,6 +92,8 @@ public class PostServiceTest  {
         when(userService.getConnectedUser()).thenReturn(userSubscriber);
         when(postRepository.save(post)).thenReturn(post);
         when(postMapper.mapToPostDto(post)).thenReturn(postDto);
+        when(topicService.findBySubject(postDto.getTopicSubject()))
+                .thenReturn(Topic.builder().subject("Java").build());
 
         // Appelle la méthode à tester
         PostDto actualPost = postService.create(postDto);
