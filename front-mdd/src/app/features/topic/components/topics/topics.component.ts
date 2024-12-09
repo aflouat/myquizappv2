@@ -7,9 +7,10 @@ import { NavigationEnd, Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-topics',
-  templateUrl: './topics.component.html',
-  styleUrl: './topics.component.css'
+    selector: 'app-topics',
+    templateUrl: './topics.component.html',
+    styleUrl: './topics.component.css',
+    standalone: false
 })
 export class TopicsComponent implements OnInit {
   topics: Topic[] = []; // Liste des topics

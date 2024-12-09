@@ -4,9 +4,10 @@ import { PostService } from '../../services/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-post-detail',
-  templateUrl: './post-detail.component.html',
-  styleUrl: './post-detail.component.css'
+    selector: 'app-post-detail',
+    templateUrl: './post-detail.component.html',
+    styleUrl: './post-detail.component.css',
+    standalone: false
 })
 export class PostDetailComponent implements OnInit {
   public post: Post | undefined;

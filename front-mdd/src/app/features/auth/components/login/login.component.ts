@@ -8,9 +8,10 @@ import { SessionInformation } from '../../../../shared/interfaces/session-inform
 import { SessionService } from '../../../../shared/services/session.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css',
+    standalone: false
 })
 export class LoginComponent implements OnInit {
 

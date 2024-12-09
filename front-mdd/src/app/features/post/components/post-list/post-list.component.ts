@@ -4,9 +4,10 @@ import { PostService } from '../../services/post.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-post-list',
-  templateUrl: './post-list.component.html',
-  styleUrl: './post-list.component.css'
+    selector: 'app-post-list',
+    templateUrl: './post-list.component.html',
+    styleUrl: './post-list.component.css',
+    standalone: false
 })
 export class PostListComponent implements OnInit{
   posts:Post[] =[];
