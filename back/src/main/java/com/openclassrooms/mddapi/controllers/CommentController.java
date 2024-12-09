@@ -18,7 +18,7 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<?> comment(@Valid @RequestBody CommentDto commentDto) {
             commentService.commentToPost(commentDto);
-        return ResponseEntity.ok().body("Commentaire soumis!");
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping

@@ -29,6 +29,7 @@ public class CommentService implements ICommentService {
     public void commentToPost(CommentDto commentDto) {
         Post post = postService.findById(commentDto.getPostId());
         Comment commentToBeSaved = commentMapper.toEntity(commentDto);
+        commentToBeSaved.setAuthor(userService.getConnectedUser());
         commentToBeSaved.setPost(post);
         commentRepository.save(commentToBeSaved);
 
@@ -36,9 +37,8 @@ public class CommentService implements ICommentService {
 
     @Override
     public List<CommentDto> getAllCommentsByPostId(Long postId) {
-        List<CommentDto> commentDtoList = commentMapper.toDtoList(
-                commentRepository.findByPostId(postId)
-        );
+        List<Comment> comments = commentRepository.findByPostId(postId);
+        List<CommentDto> commentDtoList = commentMapper.toDtoList(comments);
 
         return commentDtoList;
     }

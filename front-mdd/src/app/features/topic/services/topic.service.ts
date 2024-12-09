@@ -39,5 +39,10 @@ export class TopicService {
   subscribeUserToTopic(idTopic: number): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}subscription/${idTopic}`, {}, { headers: this.getHeaders() });
   }
+
+    // Désabonnement à un topic
+    unsubscribeUserToTopic(idTopic: number): Observable<void> {
+      return this.http.delete<void>(`${this.baseUrl}subscription/${idTopic}`, { headers: this.getHeaders() });
+    }
   
 }

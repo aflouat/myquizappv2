@@ -3,5 +3,7 @@
     <h3>{{ topic.subject }}</h3>
     <p>{{ topic.description }}</p>
     <button *ngIf="!topic.userSubscribed" mat-raised-button color="primary" (click)="subscribe(topic.id)">S'abonner</button>
+    <button *ngIf="topic.userSubscribed && showUnsuscribe" mat-raised-button color="primary" (click)="unsubscribe(topic.id)">Se désabonner</button>
+
   </div>
 </div>

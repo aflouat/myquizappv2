@@ -3,6 +3,7 @@ import { TopicService } from '../../services/topic.service';
 import { Topic } from '../../interfaces/topic.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule, NgFor } from '@angular/common';
+import { NavigationEnd, Router } from '@angular/router';
 
 
 @Component({
@@ -15,14 +16,22 @@ export class TopicsComponent implements OnInit {
   form: FormGroup; // Formulaire pour créer un topic
   errorMessage: string = '';
   @Input() showSubscribedOnly: boolean = false; // Détermine le type de topics à afficher
+  showUnsuscribe: boolean = true;
 
 
-  constructor(private topicService: TopicService, private fb: FormBuilder) {
+  constructor(private topicService: TopicService, private fb: FormBuilder, private router:Router) {
  
     // Initialisation du formulaire
     this.form = this.fb.group({
       subject: ['', Validators.required],
       description: ['', Validators.required],
+    });
+    // Initialisation du booléen en fonction de l'URL
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Vérifie si l'URL contient "/subscription/topics"
+        this.showUnsuscribe = event.url === '/subscription/topics' ? false : true;
+      }
     });
   }
 
@@ -58,6 +67,26 @@ subscribe(idTopic: number): void {
     },
     error: (err) => {
       console.error('Erreur lors de l\'abonnement :', err);
+      alert(`Erreur : ${err.status} - ${err.message}`);
+    },
+
+  });
+
+}
+
+unsubscribe(idTopic: number): void {
+
+  this.topicService.unsubscribeUserToTopic(idTopic).subscribe({
+    next: () => {
+      // Mettez à jour l'état local
+      const topic = this.topics.find(t => t.id === idTopic);
+      if (topic) {
+        topic.userSubscribed = false; // Marque le topic comme abonné
+      }
+      ;
+    },
+    error: (err) => {
+      console.error('Erreur lors du désabonnement :', err);
       alert(`Erreur : ${err.status} - ${err.message}`);
     },
 

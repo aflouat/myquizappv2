@@ -1,5 +1,13 @@
-<div class="topics-container">
-    <div class="topic-card" *ngFor="let post of posts">
+<div class="post-container">
+  <div class="row">
+    <div class="col-2">  
+          <button  color="pink"  [routerLink]="['../create',]">Créer un article</button>
+    </div>
+    <div class="col"></div>
+    <div class="col-2">Trier par &#x2193; </div>
+
+  </div>
+    <div class="post-card" *ngFor="let post of posts">
       <h3>{{ post.title }}</h3>
       <p>{{ post.topicSubject }}</p>
       <button  color="primary"  [routerLink]="['../detail',post.id]">Détail</button>

@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-list',
-
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.css'
 })

@@ -18,6 +18,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.test.context.support.WithMockUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -56,6 +59,7 @@ public class CommentServiceTest {
                 .build();
         commentDto = CommentDto.builder().content("Le TDD m'intéresse!")
                 .username(user.getUsername()).postId(1L).build();
+        comment = comment.builder().id(1L).content("Le TDD m'intéresse!").build();
     }
 
     @Test
@@ -67,6 +71,32 @@ public class CommentServiceTest {
         commentService.commentToPost(commentDto);
         verify(commentRepository,times(1)).save(expectedComment);
         Comment commentToBeSaved = commentMapper.toEntity(commentDto);
+
+    }
+
+    @Test
+    public void testGetCommentsByPost_NoComment(){
+        //should return empty list
+
+        List<CommentDto> expectedComments = new ArrayList<>();
+        //                List<CommentDto> commentDtoList = commentMapper.toDtoList(comments);
+        when(commentRepository.findByPostId(1L)).thenReturn(new ArrayList<>());
+        when(commentMapper.toDtoList(new ArrayList<>())).thenReturn(new ArrayList<>());
+        List<CommentDto> actualComments = commentService.getAllCommentsByPostId(1L);
+        Assertions.assertEquals(expectedComments, actualComments);
+
+
+    }
+
+    @Test
+    public void testGetCommentsByPost_OneComment(){
+        //should return a list with 1 el
+
+        List<CommentDto> expectedComments = List.of(commentDto);
+        when(commentRepository.findByPostId(1L)).thenReturn(List.of(comment));
+        when(commentMapper.toDtoList(List.of(comment))).thenReturn(List.of(commentDto));
+        List<CommentDto> actualComments = commentService.getAllCommentsByPostId(1L);
+        Assertions.assertEquals(expectedComments, actualComments);
 
 
     }

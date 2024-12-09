@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+.post-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espacement entre les cartes */
+    justify-content: center; /* Centrer les cartes */
+  }
+  
+  .post-card {
+    width: 300px; /* Largeur fixe des cartes */
+    background: #f9f9f9; /* Couleur d'arrière-plan */
+    padding: 15px;
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Effet d'ombre */
+    text-align: center; /* Centrer le texte */
+  }
+  
+  .post-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .post-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
