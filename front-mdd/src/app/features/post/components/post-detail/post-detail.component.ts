@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
     selector: 'app-post-detail',
     templateUrl: './post-detail.component.html',
-    styleUrl: './post-detail.component.css',
+    styleUrl: './post-detail.component.scss',
     standalone: false
 })
 export class PostDetailComponent implements OnInit {
@@ -21,6 +21,12 @@ export class PostDetailComponent implements OnInit {
     this.postService
       .detail(id)
       .subscribe((post: Post) => this.post = post);  }
+
+
+      
+  goBack(): void {
+    this.router.navigate(['/']); // Retourne à la page précédente ou d'accueil
+  }
 
 
 }

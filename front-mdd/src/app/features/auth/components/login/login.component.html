@@ -1,44 +1,32 @@
-<div class="container d-flex flex-column justify-content-center align-items-center vh-100">
-  <div class="w-100 d-flex align-items-center mb-4" style="position: relative;">
-    <!-- Flèche de retour -->
-    <button class="btn p-0 back-arrow" (click)="goBack()">
-      <i class="bi bi-arrow-left"></i>
-    </button>
-    <!-- Titre -->
-    <h2 class="mx-auto text-center">Se connecter</h2>
-  </div>
-  <div class="card p-4 border-0" style="max-width: 400px; width: 100%;">
-    <form  [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="email" class="form-label">E-mail ou nom d'utilisateur</label>
-        <input
-          type="text"
-          id="identifier"
-          formControlName="identifier"
-          class="form-control"
-        />
-      </div>
+<div class="container">
 
-      <div class="mb-3">
-        <label for="password" class="form-label">Mot de passe</label>
-        <input
-          type="password"
-          id="password"
-          formControlName="password"
-          class="form-control"
-        />
-        <div class="text-danger" *ngIf="form.get('password')?.hasError('complexity')">
-          Le mot de passe doit contenir au moins 8 caractères, une majuscule et un chiffre.
-        </div>
-      </div>
 
-      <button
-        type="submit"
-        class="custom-button"
-        
-      >
-        Se connecter
+  <!-- Contenu principal -->
+  <div class="content">
+    <div class="header-form">
+      <button mat-icon-button class="back-arrow" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
       </button>
-    </form>
+      <h2>Se connecter</h2>
+    </div>
+
+    <!-- Formulaire -->
+    <mat-card class="form-card">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field class="form-field">
+          <mat-label>E-mail ou nom d'utilisateur</mat-label>
+          <input matInput type="text" formControlName="identifier" />
+        </mat-form-field>
+
+        <mat-form-field class="form-field" >
+          <mat-label>Mot de passe</mat-label>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="submit-button" type="submit">
+          Se connecter
+        </button>
+      </form>
+    </mat-card>
   </div>
 </div>

@@ -8,14 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import {  HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { SharedModule } from './shared/shared.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [AppComponent,HeaderComponent],
-  imports: [BrowserModule, ReactiveFormsModule,RouterModule,CommonModule,AppRoutingModule,
-    ],
+  imports: [ BrowserModule,ReactiveFormsModule,RouterModule,AppRoutingModule, SharedModule,NoopAnimationsModule],
   bootstrap: [AppComponent],
-  providers:[provideHttpClient(), { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },]
+  providers:[ provideHttpClient(),{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }]
 })
 export class AppModule {}
 

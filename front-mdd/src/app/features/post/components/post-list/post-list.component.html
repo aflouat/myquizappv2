@@ -1,16 +1,28 @@
+
+
 <div class="post-container">
+
+  <!-- Barre supérieure -->
   <div class="row">
     <div class="col-2">  
-          <button  color="pink"  [routerLink]="['../create',]">Créer un article</button>
+      <button mat-raised-button color="primary" [routerLink]="['../create']">Créer un article</button>
     </div>
     <div class="col"></div>
-    <div class="col-2">Trier par &#x2193; </div>
-
-  </div>
-    <div class="post-card" *ngFor="let post of posts">
-      <h3>{{ post.title }}</h3>
-      <p>{{ post.topicSubject }}</p>
-      <button  color="primary"  [routerLink]="['../detail',post.id]">Détail</button>
+    <div class="col-2">
+      <button mat-button> Trier par &#x2193; </button>
     </div>
   </div>
+
+  <!-- Grille des posts -->
+  <mat-grid-list [cols]="gridCols" rowHeight="2:1" gutterSize="30px">
+    <mat-grid-tile *ngFor="let post of posts" [routerLink]="['../detail', post.id]" class="post-card">
+      <div class="card-content">
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.topicSubject }}</p>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+ 
   
+</div>

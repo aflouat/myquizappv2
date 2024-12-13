@@ -4,16 +4,7 @@ package com.openclassrooms.mddapi.mapper;
 import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.models.Post;
 import com.openclassrooms.mddapi.models.Topic;
-import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.security.JwtUtils;
-import com.openclassrooms.mddapi.services.impl.PostService;
-import com.openclassrooms.mddapi.services.impl.TopicService;
-import com.openclassrooms.mddapi.services.impl.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -31,6 +22,7 @@ public class PostMapper {
                 .title(post.getTitle())
                 .topicSubject(post.getTopic().getSubject())
                 .createdAt(post.getCreatedAt())
+                .authorUsername(post.getAuthor().getUsername())
                 .build();
         return postDto;
     }

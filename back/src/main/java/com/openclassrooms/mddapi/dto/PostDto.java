@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.dto;
 
-import com.openclassrooms.mddapi.models.Topic;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,5 +16,6 @@ public class PostDto {
     private String content;
     private String topicSubject;
     private LocalDateTime createdAt;
+    private String authorUsername;
 
 }

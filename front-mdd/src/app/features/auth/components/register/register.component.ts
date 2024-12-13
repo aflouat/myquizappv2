@@ -9,7 +9,7 @@ import { passwordValidator } from '../../auth.module';
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
-    styleUrl: './register.component.css',
+    styleUrl: './register.component.scss',
     standalone: false
 })
 export class RegisterComponent implements OnInit {

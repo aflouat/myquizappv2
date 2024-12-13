@@ -8,7 +8,7 @@ import { Topic } from '../../../topic/interfaces/topic.interface';
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.css'],
+    styleUrls: ['./profile.component.scss'],
     standalone: false
 })
 export class ProfileComponent implements OnInit {

@@ -10,7 +10,7 @@ import { SessionService } from '../../../../shared/services/session.service';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrl: './login.component.css',
+    styleUrl: './login.component.scss',
     standalone: false
 })
 export class LoginComponent implements OnInit {

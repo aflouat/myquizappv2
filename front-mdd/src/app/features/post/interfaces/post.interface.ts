@@ -3,5 +3,6 @@ export interface Post{
     title:string,
     content:string,
     topicSubject:string,
+    authorUsername:string,
     createdAt:Date
 }

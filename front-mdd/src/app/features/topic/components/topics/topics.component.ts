@@ -9,7 +9,7 @@ import { NavigationEnd, Router } from '@angular/router';
 @Component({
     selector: 'app-topics',
     templateUrl: './topics.component.html',
-    styleUrl: './topics.component.css',
+    styleUrl: './topics.component.scss',
     standalone: false
 })
 export class TopicsComponent implements OnInit {
