@@ -21,9 +21,12 @@ public class Comment{
         @NotNull
         @Size(min = 3)
         @Lob
-        String text;
+        String content;
 
         @ManyToOne
         @JoinColumn(name = "post_id")
         Post post;
+
+        @ManyToOne
+        private User author;
 }

@@ -11,7 +11,7 @@
 	<groupId>com.openclassrooms</groupId>
 	<artifactId>mdd-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mdd-api</name>
+	<name>mdd-backend</name>
 	<description>MVP project for MDD : Monde De Developpement</description>
 	<licenses>
 		<license>

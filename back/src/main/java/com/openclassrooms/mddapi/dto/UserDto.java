@@ -11,28 +11,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
-    private Long id;
 
-    @NonNull
-    @Size(max = 50)
     @Email
     private String email;
-
-    @NonNull
-    @Size(max = 20)
-    private String lastName;
-
-    @NonNull
-    @Size(max = 20)
-    private String firstName;
-
-
+    private String username;
 
     @JsonIgnore
     @Size(max = 120)
     private String password;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 }

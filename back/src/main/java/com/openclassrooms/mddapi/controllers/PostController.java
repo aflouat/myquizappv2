@@ -1,54 +1,53 @@
 package com.openclassrooms.mddapi.controllers;
 
 import com.openclassrooms.mddapi.dto.PostDto;
-import com.openclassrooms.mddapi.mapper.PostMapper;
-import com.openclassrooms.mddapi.models.Post;
-import com.openclassrooms.mddapi.services.impl.UserService;
+
+import com.openclassrooms.mddapi.payload.response.MessageResponse;
 import com.openclassrooms.mddapi.services.interfaces.IPostService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/post")
 @RequiredArgsConstructor
-public class PostController implements IPostController {
+public class PostController  {
 
-    Logger logger = LoggerFactory.getLogger(PostController.class);
 
     private final IPostService postService;
-    private final PostMapper postMapper;
 
-    @Override
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody PostDto postDto, HttpServletRequest request) {
+    public ResponseEntity<?> create(@Valid @RequestBody PostDto postDto) {
 
-        Post postToSave = this.postMapper.mapToPost(postDto,request);
-        logger.debug("Creating post: {}", postToSave);
-            Post savedPost = postService.create(postToSave );
-           // User author = userService.fetchUserByToken()
+            PostDto savedPostDto = postService.create(postDto );
 
-        return ResponseEntity.ok().body(savedPost);
+        return ResponseEntity.ok().body(savedPostDto);
+    }
+    @PostMapping("/bulk")
+    public ResponseEntity<?> createBulk(@Valid @RequestBody List<PostDto> postDtoList) {
+
+        postService.createBulk(postDtoList );
+
+        return ResponseEntity.ok().body(new MessageResponse("Post created successfully"));
     }
 
-    @Override
-    public ResponseEntity<?> findById(String id) {
-        return null;
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(postService.getPostById(id));
     }
 
-    @Override
-    public ResponseEntity<?> update(String id, PostDto postDto) {
-        return null;
+
+    @GetMapping
+    public ResponseEntity<?> getAllFeeds() {
+        return ResponseEntity.ok().body(postService.findAllFeeds());
     }
 
-    @Override
-    public ResponseEntity<?> findAll() {
-        return null;
-    }
+
+
 }

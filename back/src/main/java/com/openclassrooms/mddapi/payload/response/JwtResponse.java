@@ -1,24 +1,26 @@
 package com.openclassrooms.mddapi.payload.response;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@Data
 @Getter
 @Setter
+@ToString
+@Builder
 public class JwtResponse {
-  private String token;
-  private String type = "Bearer";
+
   private Long id;
+  private String email;
   private String username;
-  private String firstName;
-  private String lastName;
+  public String type ;
+  private String token;
 
 
-  public JwtResponse(String accessToken, Long id, String username,String firstName, String lastName) {
-    this.token = accessToken;
+  public JwtResponse(Long id, String email, String username,String type, String token) {
+    this.email = email;
     this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    this.token = token;
     this.username = username;
+    this.type ="Bearer";
   }
 }

@@ -1,0 +1,48 @@
+/* Conteneur principal */
+.comments-container {
+    display: flex;
+    flex-direction: column; /* Aligne les blocs verticalement */
+    gap: 20px; /* Espace entre les blocs */
+    width: 80%;
+    margin: 0 auto; /* Centre le conteneur horizontalement */
+  }
+.global-comment-title{
+    font-size: x-large;
+}
+.comment-item{
+    width:80%;
+    display:flex;
+    justify-content:contents;
+    align-items:center;
+    margin:30px auto;
+    height: 80px;
+
+    
+}
+.comment-item-username{
+    flex:1;
+    height: 100%;
+}
+.comment-item-content{
+    flex:8;
+    border: 1px solid #ccc; /* Optionnel : bordure pour la visibilité */
+    border-radius: 10px; /* Coins arrondis */
+    background-color: #f9f9f9; /* Couleur de fond légère */
+    height: 100%;
+    padding: 20px;
+
+}
+
+.new-comment{
+
+    width:80%;
+    justify-content:contents;
+    align-items:center;
+    margin:30px auto;
+    height: 80px;
+    border: 1px solid #000; /* Optionnel : bordure pour la visibilité */
+    border-radius: 10px; /* Coins arrondis */
+    padding: 20px 0px 0px 20px;
+
+
+}

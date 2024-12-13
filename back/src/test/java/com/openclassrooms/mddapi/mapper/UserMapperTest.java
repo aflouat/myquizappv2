@@ -20,8 +20,8 @@ public class UserMapperTest {
 
     @BeforeEach
     public void setUp() {
-        user = User.builder().id(1L).email("test@gmail.com").firstName("Joseph").lastName("Smith").password("pwd").build();
-        userDto = UserDto.builder().id(1L).email("test@gmail.com").firstName("Joseph").lastName("Smith").build();
+        user = User.builder().id(1L).email("test@gmail.com").username("Joseph").password("pwd").build();
+        userDto = UserDto.builder().email("test@gmail.com").username("Joseph").build();
 
     }
     @Test
