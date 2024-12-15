@@ -41,7 +41,7 @@ export class TopicsComponent implements OnInit {
   }
 
   // Récupérer les topics
-  getTopics(): void {
+  public getTopics(): void {
     if (this.showSubscribedOnly) {
       this.topicService.getSubscribedTopics().subscribe({
         next: (topics) => (this.topics = topics),

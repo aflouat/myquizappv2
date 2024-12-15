@@ -1,22 +1,25 @@
 <div class="profile-container">
     <h2 class="text-center">Profil utilisateur</h2>
     
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input id="username" type="text" formControlName="username" class="form-control" />
-      </div>
-      
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" type="email" formControlName="email" class="form-control" />
-      </div>
-      
-      <button type="submit" class="btn btn-primary">Sauvegarder</button>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" >
+      <mat-form-field class="form-field">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" formControlName="username" />
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" formControlName="email" />
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="submit-button" type="submit">
+        Sauvegarder
+      </button>
+      <button mat-button color="warn" (click)="logout()">
+        Se déconnecter
+      </button>
+  
     </form>
 
-      <a class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover pointer-link"
-       (click)="logout()">Se déconnecter</a>
+ 
     
   
     <hr class="divider" />

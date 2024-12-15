@@ -13,6 +13,7 @@ export class PostListComponent implements OnInit{
   posts:Post[] =[];
   errorMessage: string = '';
   gridCols: number = 2; // Nombre de colonnes par défaut
+  sortOrder!:string;
 
 
   constructor(private postService: PostService, private router:Router) {}
@@ -20,6 +21,7 @@ export class PostListComponent implements OnInit{
   ngOnInit(): void {
 this.getPosts();
 this.adjustGridCols(window.innerWidth);
+this.sortOrder='desc';
 
 }
 
@@ -43,6 +45,21 @@ this.adjustGridCols(window.innerWidth);
 
   private adjustGridCols(width: number): void {
     this.gridCols = width < 768 ? 1 : 2; // 1 colonne pour mobile, 2 pour écran large
+  }
+
+  sortByCreationDateDescOrAsc(order: 'asc' | 'desc'): void {
+    this.posts.sort((a, b) => {
+      const dateA = new Date(a.createdAt).getTime();
+      const dateB = new Date(b.createdAt).getTime();
+      return order === 'asc' ? dateA - dateB : dateB - dateA;
+    });
+  }
+  
+  toggleSortOrder(): void {
+    // Alternance entre 'asc' et 'desc'
+    const currentOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    this.sortOrder = currentOrder;
+    this.sortByCreationDateDescOrAsc(currentOrder);
   }
 
 

@@ -21,7 +21,7 @@ public class CommentController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/{postId}")
     public ResponseEntity<?> getComments(@PathVariable Long postId) {
         return ResponseEntity.ok().body(commentService.getAllCommentsByPostId(postId));
     }

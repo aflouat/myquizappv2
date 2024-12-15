@@ -3,7 +3,11 @@
     margin: auto;
     padding: 20px;
   }
-  
+  form {
+    display: flex;
+    flex-direction: column; /* Arrange les éléments verticalement */
+    gap: 16px; /* Espace entre les champs */
+  }
   .form-group {
     margin-bottom: 15px;
   }
