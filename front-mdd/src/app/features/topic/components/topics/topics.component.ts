@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { TopicService } from '../../services/topic.service';
 import { Topic } from '../../interfaces/topic.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -65,6 +65,7 @@ subscribe(idTopic: number): void {
         topic.userSubscribed = true; // Marque le topic comme abonné
       }
       ;
+      this.ngOnInit();
     },
     error: (err) => {
       console.error('Erreur lors de l\'abonnement :', err);
@@ -79,12 +80,8 @@ unsubscribe(idTopic: number): void {
 
   this.topicService.unsubscribeUserToTopic(idTopic).subscribe({
     next: () => {
-      // Mettez à jour l'état local
-      const topic = this.topics.find(t => t.id === idTopic);
-      if (topic) {
-        topic.userSubscribed = false; // Marque le topic comme abonné
-      }
-      ;
+      this.topics = this.topics.filter(topic => topic.id !== idTopic);
+
     },
     error: (err) => {
       console.error('Erreur lors du désabonnement :', err);

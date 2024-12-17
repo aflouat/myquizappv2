@@ -40,6 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (dontNeedAuthorisation(request, response, filterChain, path))
             return;  // Continuer la chaîne sans vérification JWT pour ces routes
+
         String token = jwtUtils.extractTokenFromRequest(request);
         String identifier = null;
         logger.debug("token: " + token);
@@ -49,8 +50,6 @@ public class JwtFilter extends OncePerRequestFilter {
         logger.debug("identifier: " + identifier);
 
         if (hasToBoAuthenticated(identifier)) {
-
-
             logger.debug("check authentication: " + identifier);
             UserPrincipal userPrincipal = (UserPrincipal) context.
                     getBean(UserDetailsService.class).

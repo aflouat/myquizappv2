@@ -1,26 +1,21 @@
-<div class="profile-container">
-    <h2 class="text-center">Profil utilisateur</h2>
-    
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" >
-      <mat-form-field class="form-field">
-        <mat-label>Username</mat-label>
-        <input matInput type="text" formControlName="username" />
-      </mat-form-field>
-      <mat-form-field class="form-field">
-        <mat-label>Email</mat-label>
-        <input matInput type="text" formControlName="email" />
-      </mat-form-field>
-      <button mat-raised-button color="primary" class="submit-button" type="submit">
-        Sauvegarder
-      </button>
-      <button mat-button color="warn" (click)="logout()">
-        Se déconnecter
-      </button>
-  
-    </form>
-
- 
-    
+<div class="form-container">
+  <h2>Profil utilisateur</h2>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput type="text" formControlName="username" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
+    </mat-form-field>
+    <div class="button-container">
+    <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
+    <button mat-button class="logout-button" (click)="logout()">Se déconnecter</button>
+  </div>
+  </form>
+</div>
+    <div class="subscribed-topics-container">
   
     <hr class="divider" />
     <h2 class="text-center">Abonnements</h2>
