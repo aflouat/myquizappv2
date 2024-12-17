@@ -16,8 +16,8 @@
     </div>
     
     <div class="content">{{ post?.content }}</div>
- <div class="comments">
-    <app-comment-list></app-comment-list>
+ <div class="comments" *ngIf="post?.id">
+    <app-comment-list [postId]="post!.id"></app-comment-list>
 </div>
     </div>
 

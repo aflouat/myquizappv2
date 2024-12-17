@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -37,10 +38,10 @@ public class CommentService implements ICommentService {
 
     @Override
     public List<CommentDto> getAllCommentsByPostId(Long postId) {
-        List<Comment> comments = commentRepository.findByPostId(postId);
-        List<CommentDto> commentDtoList = commentMapper.toDtoList(comments);
-
-        return commentDtoList;
+        return commentRepository.findByPostId(postId)
+                .stream()
+                .map(comment -> commentMapper.toDto(comment))
+                .collect(Collectors.toList());
     }
 
 

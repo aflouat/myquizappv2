@@ -41,10 +41,12 @@ public class PostService implements IPostService {
         List<TopicDto> topicDtoList = subscriptionService.getAllTopicsWithSubscriptionStatusForCurrentUser();
         List<PostDto> postDtoList = new ArrayList<>();
         for (TopicDto topicDto : topicDtoList) {
-            postDtoList.addAll(
-                    postMapper.mapToPostDtoList(
-                            postRepository.findByTopicSubject(
-                                    topicDto.getSubject())));
+            if (topicDto.isUserSubscribed()) {
+                postDtoList.addAll(
+                        postMapper.mapToPostDtoList(
+                                postRepository.findByTopicSubject(
+                                        topicDto.getSubject())));
+            }
         }
 
         return postDtoList;

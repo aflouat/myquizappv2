@@ -20,8 +20,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CommentMapper {
 
-
         CommentMapper INSTANCE = Mappers.getMapper(CommentMapper.class);
+        @Mapping(target ="postId" ,source="post.id")
+        @Mapping(target="username",source ="author.username" )
 
         CommentDto toDto(Comment comment);
 
