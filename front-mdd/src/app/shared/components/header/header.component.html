@@ -17,7 +17,7 @@
     </div>
  
       <!-- Menu burger (visible uniquement sur mobile) -->
-      <div class="menu-mobile" *ngIf="isMobile">
+      <div class="menu-mobile" *ngIf="showRightMenu && isMobile">
         <button mat-icon-button [matMenuTriggerFor]="mobileMenu">
           <mat-icon>menu</mat-icon>
         </button>

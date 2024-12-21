@@ -1,11 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 .post-container {
-  width:100%;
+  width:95%;
+  max-width: 100%;
     display: flex;
     justify-content:  flex-start; /* Centrer les cartes */
     align-items: flex-start;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px 0px;
 
   }
    .back-arrow{

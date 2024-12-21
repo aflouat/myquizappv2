@@ -4,7 +4,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background-color: #ffffff;
 }
 
@@ -13,47 +12,40 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  flex-grow: 1;
   width: 100%;
-  max-width: 400px;
 }
-
-/* Titre et retour arrière */
-.header-form {
+.container-back-arrow {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  width: 100%;
+  margin-bottom: 16px;
   position: relative;
+}
+.login-form-container {
+  width: 40%; /* Largeur spécifique pour le formulaire */
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espacement entre les éléments */
+  align-items: center;
+}
+.form-field {
   width: 100%;
 }
-
-.header-form h2 {
-  margin: 0 auto;
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
 .back-arrow {
   position: absolute;
   left: 0;
-  background-color: gray;
 }
-
-/* Formulaire */
-.form-card {
+h2 {
+  margin: 0 auto;
+  text-align: center;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
   width: 100%;
-  padding: 20px;
-  box-shadow: 0 4px 6px #ffffff;
-  border-radius: 8px;
 }
-
-.form-field {
-  width: 100%;
-  margin-bottom: 15px;
-}
-
 .submit-button {
-  width: 100%;
+  width: 139px;
   height: 40px;
 }

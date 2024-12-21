@@ -1,7 +1,7 @@
 <div class="container">
   <!-- Contenu principal -->
   <div class="content">
-    <div class="header-form">
+    <div class="container-back-arrow">
       <button mat-icon-button class="back-arrow" (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
       </button>
@@ -9,9 +9,10 @@
     </div>
 
     <!-- Formulaire -->
-    <mat-card class="form-card">
+    <div class="login-form-container">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <mat-form-field class="form-field">
+
+        <mat-form-field class="form-field" >
           <mat-label>E-mail ou nom d'utilisateur</mat-label>
           <input matInput type="text" formControlName="identifier" />
         </mat-form-field>
@@ -20,11 +21,12 @@
           <mat-label>Mot de passe</mat-label>
           <input matInput type="password" formControlName="password" />
         </mat-form-field>
+        <div class="button-container">
 
         <button mat-raised-button color="primary" class="submit-button" type="submit">
           Se connecter
         </button>
+        </div>
       </form>
-    </mat-card>
   </div>
 </div>

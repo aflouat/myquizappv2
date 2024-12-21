@@ -1,8 +1,8 @@
 .post-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 1200px; /* Limiter la largeur de la grille si nécessaire */
+  width: 95%;
+  max-width: 100%; /* Limiter la largeur de la grille si nécessaire */
   margin: 0 auto; /* Centrer la grille */
 }
 
