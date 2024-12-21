@@ -8,13 +8,11 @@ import lombok.*;
 @ToString
 @Builder
 public class JwtResponse {
-
   private Long id;
   private String email;
   private String username;
   public String type ;
   private String token;
-
 
   public JwtResponse(Long id, String email, String username,String type, String token) {
     this.email = email;

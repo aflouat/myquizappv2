@@ -18,22 +18,17 @@ import java.util.List;
 @RequestMapping("/api/post")
 @RequiredArgsConstructor
 public class PostController  {
-
-
     private final IPostService postService;
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody PostDto postDto) {
-
             PostDto savedPostDto = postService.create(postDto );
-
         return ResponseEntity.ok().body(savedPostDto);
     }
+
     @PostMapping("/bulk")
     public ResponseEntity<?> createBulk(@Valid @RequestBody List<PostDto> postDtoList) {
-
         postService.createBulk(postDtoList );
-
         return ResponseEntity.ok().body(new MessageResponse("Post created successfully"));
     }
 
@@ -42,12 +37,8 @@ public class PostController  {
         return ResponseEntity.ok().body(postService.getPostById(id));
     }
 
-
     @GetMapping
     public ResponseEntity<?> getAllFeeds() {
         return ResponseEntity.ok().body(postService.findAllFeeds());
     }
-
-
-
 }

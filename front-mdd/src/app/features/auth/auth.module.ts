@@ -11,8 +11,17 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TopicModule } from '../topic/topic.module';
 import { ProfileComponent } from './components/profile/profile.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from 'src/app/interceptors/jwt.interceptor';
 
 @NgModule({
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+  ],
   declarations: [
     RegisterComponent,
     LoginComponent,

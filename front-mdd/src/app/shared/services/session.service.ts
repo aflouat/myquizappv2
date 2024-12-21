@@ -1,23 +1,34 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SessionInformation } from '../interfaces/session-information.interface';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  public isLogged = false;
+  public isLogged = false
   public sessionInformation: SessionInformation | undefined;
-
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
-  constructor() {
-    // Initialiser l'état de la session depuis localStorage
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      this.sessionInformation = JSON.parse(storedUser) as SessionInformation;
+
+  constructor(private userService: UserService) {
+    console.log('SessionService.constructor');
+    const token = localStorage.getItem('token');
+    console.log('token2:', token);
+  
+    if (token) {
       this.isLogged = true;
-      this.next();
+      this.userService.loadSessionInformation(token).subscribe({
+        next: (sessionInformation) => {
+          console.log('token3:', token);
+          this.sessionInformation = sessionInformation;
+          this.next();
+        },
+        error: (error) => {
+          console.error('Failed to load session information:', error);
+        }
+      });
     }
   }
 
@@ -25,22 +36,18 @@ export class SessionService {
     return this.isLoggedSubject.asObservable();
   }
 
-  public logIn(user: SessionInformation): void {
-    localStorage.setItem('user', JSON.stringify(user));
-
-    this.sessionInformation = user;
+  public logIn(sessionInformation: SessionInformation): void {
+    localStorage.setItem('token', sessionInformation.token);
+    this.sessionInformation = sessionInformation;
     this.isLogged = true;
     this.next();
   }
 
   public logOut(): void {
+    localStorage.removeItem('token');
     this.sessionInformation = undefined;
     this.isLogged = false;
     this.next();
-    localStorage.setItem('user', '');
-    localStorage.setItem('token', '');
-
-
   }
 
   private next(): void {

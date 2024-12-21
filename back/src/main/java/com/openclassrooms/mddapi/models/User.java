@@ -40,7 +40,6 @@ public class User {
 
     private String username;
 
-
     @NotNull
     @Size(max = 120)
     private String password;
@@ -52,7 +51,4 @@ public class User {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-
-
 }

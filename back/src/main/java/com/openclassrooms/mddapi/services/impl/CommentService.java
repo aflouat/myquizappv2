@@ -1,9 +1,7 @@
 package com.openclassrooms.mddapi.services.impl;
 
 import com.openclassrooms.mddapi.dto.CommentDto;
-import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.mapper.CommentMapper;
-import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.models.Post;
 import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.repositories.CommentRepository;
@@ -24,8 +22,6 @@ public class CommentService implements ICommentService {
     private final CommentMapper commentMapper;
     private final UserService userService;
 
-
-
     @Override
     public void commentToPost(CommentDto commentDto) {
         Post post = postService.findById(commentDto.getPostId());
@@ -33,7 +29,6 @@ public class CommentService implements ICommentService {
         commentToBeSaved.setAuthor(userService.getConnectedUser());
         commentToBeSaved.setPost(post);
         commentRepository.save(commentToBeSaved);
-
     }
 
     @Override
@@ -43,6 +38,4 @@ public class CommentService implements ICommentService {
                 .map(comment -> commentMapper.toDto(comment))
                 .collect(Collectors.toList());
     }
-
-
 }

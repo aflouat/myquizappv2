@@ -17,7 +17,4 @@ public class Topic {
     private Long id;
     private String subject;
     private String description;
-
-
-
 }

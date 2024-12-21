@@ -9,11 +9,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-
 public interface TopicMapper {
 
     TopicMapper INSTANCE = Mappers.getMapper(TopicMapper.class);
-    //@Mapping(target = "id", source = "id") // Mappage explicite de l'ID
 
     TopicDto toDto(Topic topic);
 

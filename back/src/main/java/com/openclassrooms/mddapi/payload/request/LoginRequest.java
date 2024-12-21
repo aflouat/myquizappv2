@@ -11,10 +11,8 @@ import lombok.Setter;
 @Setter
 public class LoginRequest {
 	@NotBlank
-  private String identifier;
+  	private String identifier;
 
 	@NotBlank
 	private String password;
-
-
 }

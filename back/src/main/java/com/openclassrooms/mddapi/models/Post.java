@@ -16,8 +16,10 @@ public class Post {
     private Long id;
 
     private String title;
+
     @ManyToOne
     private User author;
+
     @Lob
     private String content;
 
@@ -27,5 +29,4 @@ public class Post {
     @CreatedDate
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
-
 }

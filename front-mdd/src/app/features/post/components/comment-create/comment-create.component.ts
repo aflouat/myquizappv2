@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentService } from '../../services/comment.service';
 import { PostComment } from '../../interfaces/comment.interface';
@@ -12,7 +12,8 @@ import { PostComment } from '../../interfaces/comment.interface';
 export class CommentCreateComponent {
   @Input() postId!: number; // Identifiant du post
   commentForm: FormGroup; // Formulaire de création de commentaire
-
+  @Output() commentAdded = new EventEmitter<void>(); // Événement d'ajout de commentaire
+ 
   constructor(private fb: FormBuilder, private commentService: CommentService) {
     // Initialisation du formulaire
     this.commentForm = this.fb.group({
@@ -35,16 +36,12 @@ export class CommentCreateComponent {
           next: () => {
             // Réinitialiser le formulaire après la création
             this.commentForm.reset();
-
+            this.commentAdded.emit(); // Émettre un événement après ajout
           },
           error: (err) => {
             console.error('Erreur lors de la création du commentaire', err);
           },
         });
-      }
-    else {
-      // Marque tous les champs comme "touchés" pour activer les validations
-      this.commentForm.markAllAsTouched();
-    }
-  }
+      } 
+   }
 }

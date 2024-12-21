@@ -10,12 +10,12 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("Chatop API")
-                        .description("Chatop API documentation")
+                .info(new Info().title("MDD API")
+                        .description("Monde de développement API documentation")
                         .version("1.0.0")
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("Chatop Wiki Documentation")
-                        .url("https://chatop.wiki.github.org/docs"));
+                        .description(" Wiki Documentation")
+                        .url("https://github.com/aflouat/P6-MDD-MVP-une-application-full-stack/wiki/Mode-de-developpement"));
     }
 }

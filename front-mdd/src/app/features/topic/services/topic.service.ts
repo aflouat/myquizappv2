@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Topic } from '../interfaces/topic.interface';
 import { environment } from '../../../../environments/environment';
+import { HttpHeadersService } from 'src/app/shared/services/http.headers.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,37 +13,27 @@ export class TopicService {
 
   private apiUrl = this.baseUrl+'topic';
 
-  constructor(private http: HttpClient) {}
-
-  // Obtenir le token Bearer
-  private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); // Remplacez par la méthode d'accès au token
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-  }
+  constructor(private http: HttpClient, private httpHeadersService:HttpHeadersService) {}
 
   // Liste des topics (GET)
   getTopics(): Observable<Topic[]> {
-    //return this.http.get<Topic[]>(this.apiUrl, { headers: this.getHeaders() });
-    return this.http.get<Topic[]>(this.apiUrl, { headers: this.getHeaders() });
+    return this.http.get<Topic[]>(this.apiUrl, { headers: this.httpHeadersService.getHeaders() });
 
   }
     // Liste des topics (GET)
     getSubscribedTopics(): Observable<Topic[]> {
-      return this.http.get<Topic[]>(this.baseUrl+'subscription', { headers: this.getHeaders() });
+      return this.http.get<Topic[]>(this.baseUrl+'subscription', { headers: this.httpHeadersService.getHeaders() });
   
     }
 
   // Abonnement à un topic
   subscribeUserToTopic(idTopic: number): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}subscription/${idTopic}`, {}, { headers: this.getHeaders() });
+    return this.http.post<void>(`${this.baseUrl}subscription/${idTopic}`, {}, { headers: this.httpHeadersService.getHeaders() });
   }
 
     // Désabonnement à un topic
     unsubscribeUserToTopic(idTopic: number): Observable<void> {
-      return this.http.delete<void>(`${this.baseUrl}subscription/${idTopic}`, { headers: this.getHeaders() });
+      return this.http.delete<void>(`${this.baseUrl}subscription/${idTopic}`, { headers: this.httpHeadersService.getHeaders() });
     }
   
 }

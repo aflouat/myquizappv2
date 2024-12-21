@@ -14,5 +14,4 @@ public class TopicDto {
     private String subject;
     private String description;
     private boolean isUserSubscribed;
-
 }

@@ -13,18 +13,14 @@ import java.util.List;
 @RequestMapping("/api/subscription")
 @RequiredArgsConstructor
 public class SubscriptionController {
-
-
     private final ISubscriptionService subscriptionService;
-
 
     @PostMapping("/{idTopic}")
     public ResponseEntity<?> subscribeUserToTopic(@PathVariable final Long idTopic) {
         subscriptionService.subscribe(idTopic);
-
         return ResponseEntity.ok().build();
-
     }
+
     @DeleteMapping("{idTopic}")
     public ResponseEntity<?> unsubscribeUserFromTopic(@PathVariable final Long idTopic) {
         subscriptionService.unSubscribe(idTopic);
@@ -42,5 +38,4 @@ public class SubscriptionController {
         List<TopicDto> topicDtoList = subscriptionService.getAllSubscribedTopics();
         return ResponseEntity.ok().body(topicDtoList);
     }
-
 }

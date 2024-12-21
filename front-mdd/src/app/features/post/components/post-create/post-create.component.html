@@ -11,8 +11,7 @@
       </div>
   
       <!-- Formulaire -->
-      <mat-card class="post-form">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="post-form">
             <mat-form-field>
                 <mat-label>Séléctionner un thème</mat-label>
                 <mat-select formControlName="topicSubject">
@@ -36,7 +35,6 @@
             Créer
           </button>
         </form>
-      </mat-card>
     </div>
   </div>
   

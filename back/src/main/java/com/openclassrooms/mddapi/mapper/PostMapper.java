@@ -31,7 +31,6 @@ public class PostMapper {
         return posts.stream().map(this::mapToPostDto).collect(Collectors.toList());
     }
 
-
     public Post mapToPost(PostDto postDto){
         Topic topic = Topic.builder().subject(postDto.getTopicSubject()).build();
 

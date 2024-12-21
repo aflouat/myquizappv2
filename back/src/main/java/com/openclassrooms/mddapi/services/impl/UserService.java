@@ -1,12 +1,12 @@
 package com.openclassrooms.mddapi.services.impl;
 
-import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.models.UserPrincipal;
 import com.openclassrooms.mddapi.payload.request.LoginRequest;
 import com.openclassrooms.mddapi.payload.request.SignupRequest;
+import com.openclassrooms.mddapi.payload.request.UserCredentialUpdateRequest;
 import com.openclassrooms.mddapi.payload.response.JwtResponse;
 import com.openclassrooms.mddapi.repositories.UserRepository;
 
@@ -30,9 +30,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService implements IUserService {
-
-
-
     private final UserRepository userRepository;
     private final JwtServiceImpl jwtServiceImpl;
     private final AuthenticationManager authManager;
@@ -60,7 +57,7 @@ public class UserService implements IUserService {
     }
 
     public User findUserByIdentifier(String identifier) {
-        User user = userRepository.findByEmail(identifier);
+        User user = findUserByEmail(identifier);
 
         // Si aucun utilisateur trouvé par email, rechercher par username
         if (user == null) {
@@ -68,6 +65,16 @@ public class UserService implements IUserService {
         }
         return user;
     }
+
+    private User findUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return user;
+    }
+    private User findUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        return user;
+    }
+
     @Override
     public User getConnectedUser()  {
         // Vérifier si l'utilisateur est authentifié
@@ -86,29 +93,56 @@ public class UserService implements IUserService {
         }
         return user;
     }
+
     @Override
-    public UserDto getConnectedUserInformation()  {
-        // Vérifier si l'utilisateur est authentifié
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || !authentication.isAuthenticated()) {
-            throw new BadRequestException();
+    public void updateUser(UserCredentialUpdateRequest userCredentialUpdateRequest) {
+        // Récupérer l'utilisateur connecté
+        User foundUser = this.getConnectedUser();
+
+        if (foundUser == null) {
+            throw new IllegalStateException("Aucun utilisateur connecté trouvé.");
         }
 
-        // Récupérer l'email de l'utilisateur actuellement connecté
-        String email = authentication.getName();
+        // Vérifier si l'email est déjà utilisé par un autre utilisateur
+        User userByEmail = userRepository.findByEmail(userCredentialUpdateRequest.getEmail());
 
-        // Trouver l'utilisateur par son email
-        User user = userRepository.findByEmail(email);
-        UserDto userDTO;
-        if (user!=null) {
-            // Créer un DTO ou retourner uniquement les informations nécessaires
-             userDTO = new UserDto( user.getEmail(), user.getUsername(), " ",user.getCreatedAt(),user.getUpdatedAt());  // Exemple de DTO
-        } else {
-            throw new UsernameNotFoundException("Utilisateur non trouve");
+        if (userByEmail != null && !userByEmail.getId().equals(foundUser.getId())) {
+            throw new IllegalArgumentException("Cet email est déjà utilisé par un autre utilisateur.");
         }
-        return userDTO;
+
+        User userByUsername = userRepository.findByUsername(userCredentialUpdateRequest.getUsername());
+        if (userByUsername != null && !userByUsername.getId().equals(foundUser.getId())) {
+            throw new IllegalArgumentException("Ce nom d'utilisateur est déjà utilisé par un autre utilisateur.");
+        }
+
+        if(userCredentialUpdateRequest.getEmail()!= null && !userCredentialUpdateRequest.getEmail().equals(foundUser.getEmail())) {
+            foundUser.setEmail(userCredentialUpdateRequest.getEmail());
+        }
+
+        if(userCredentialUpdateRequest.getUsername()!= null && !userCredentialUpdateRequest.getUsername().equals(foundUser.getUsername())) {
+            foundUser.setUsername(userCredentialUpdateRequest.getUsername());
+        }
+
+        if(userCredentialUpdateRequest.getPassword()!= null && !userCredentialUpdateRequest.getPassword().equals(foundUser.getPassword())
+        && !userCredentialUpdateRequest.getPassword().isEmpty()) {
+            foundUser.setPassword(getEncodedPassword(userCredentialUpdateRequest.getPassword()));
+        }
+        userRepository.save(foundUser);
     }
 
+    private String getEncodedPassword(String password) {
+        return encoder.encode(password); // Assurez-vous que le mot de passe est hashé
+    }
+
+    @Override
+    public JwtResponse getConnectedUserJwtResponse()  {
+         User user = getConnectedUser();
+         logger.debug("getConnectedUserJwtResponse: {}", user);
+         JwtResponse jwtResponse = new JwtResponse(user.getId(),user.getEmail(),user.getUsername(),
+                 null, null);
+
+        return jwtResponse;
+    }
 
     public User getUserById(int id) {
         return userRepository.findById(id).orElse(null);
@@ -118,23 +152,21 @@ public class UserService implements IUserService {
     }
 
     public void register(SignupRequest signUpRequest) {
-
         if (userDetailsService.isUserExists(signUpRequest.getEmail()) ) {
             throw new RuntimeException("On ne peut pas créer deux utilisateurs avec " +
                     "le même e-mail!");
         }
 
-
         // Create new user's account
-
         User user = User.builder().email(signUpRequest.getEmail()).username(signUpRequest.getUsername())
                 .password(encoder.encode(signUpRequest.getPassword())).build();
         User savedUser = userRepository.save(user);
-
     }
+
     public User update(User user) {
         return userRepository.save(user);
     }
+
     public void delete(int id) {
         userRepository.deleteById(id);
     }
@@ -144,5 +176,4 @@ public class UserService implements IUserService {
         User user = userRepository.findByEmail(email);
         return  user;
     }
-
 }

@@ -1,7 +1,8 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Post } from '../../interfaces/post.interface';
 import { PostService } from '../../services/post.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-post-list',
@@ -9,14 +10,20 @@ import { Router } from '@angular/router';
     styleUrls: ['./post-list.component.scss'],
     standalone: false
 })
-export class PostListComponent implements OnInit{
+export class PostListComponent implements OnInit, OnDestroy{
   posts:Post[] =[];
   errorMessage: string = '';
   gridCols: number = 2; // Nombre de colonnes par défaut
   sortOrder!:string;
+  private postListSubscription: Subscription | undefined;
 
 
   constructor(private postService: PostService, private router:Router) {}
+  ngOnDestroy(): void {
+    if(this.postListSubscription){
+        this.postListSubscription.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
 this.getPosts();
@@ -27,15 +34,13 @@ this.sortOrder='desc';
 
   // Récupérer les topics
   getPosts(): void {
-  
-      this.postService.getPosts().subscribe({
+  console.log("getPosts");
+      this.postListSubscription = this.postService.getPosts().subscribe({
         next: (posts) => (this.posts = posts),
         error: (err) => (this.errorMessage = 'Erreur lors du chargement des posts.'),
       });
    
   }
-
- 
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {

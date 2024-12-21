@@ -21,7 +21,6 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = this.loadUserByIdentifier(username);
         if (user == null) {
-            System.out.println("User Not Found");
             throw new UsernameNotFoundException("user not found");
         }
         return UserPrincipal.builder().id(user.getId())

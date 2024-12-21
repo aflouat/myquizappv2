@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { SessionService } from '../../../../shared/services/session.service';
 import { TopicService } from '../../../topic/services/topic.service';
 import { Topic } from '../../../topic/interfaces/topic.interface';
+import { RegisterRequest } from '../../interfaces/register-request.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-profile',
@@ -13,32 +15,48 @@ import { Topic } from '../../../topic/interfaces/topic.interface';
 })
 export class ProfileComponent implements OnInit {
   public profileForm: FormGroup;
-  public subscriptions = [
-    { id: 1, title: 'Titre du thème 1', description: 'Description du thème 1' },
-    { id: 2, title: 'Titre du thème 2', description: 'Description du thème 2' },
-  ];
+
   topics: Topic[] = []; // Liste des topics
   errorMessage: string = '';
+  public onError = false;
+
 
   constructor(
     private fb: FormBuilder,
     private sessionService: SessionService,
     private router: Router,
-    private topicService:TopicService
+    private topicService:TopicService,
+    private authService:AuthService
   ) {
 
-
     this.profileForm = this.fb.group({
-      username: [this.sessionService.sessionInformation?.username || ''],
-      email: [this.sessionService.sessionInformation?.email || ''],
+      username: [ ''],
+      email: [''],
+      password: [''],
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('ProfileComponent initialized');
+    console.log('sessionInformation:', this.sessionService);
+    if (this.sessionService.sessionInformation) {
+      this.profileForm.patchValue({
+        username: this.sessionService.sessionInformation.username,
+        email: this.sessionService.sessionInformation.email
+
+      });
+    }
+  }
 
   onSubmit(): void {
     console.log('Profil mis à jour :', this.profileForm.value);
     // Logique pour enregistrer les modifications
+    if (this.profileForm.valid) {
+       const registerRequest = this.profileForm.value as RegisterRequest;
+     this.authService.update(registerRequest).subscribe({
+       error: () => this.onError = true,
+      });
+    }
   }
 
   logout(): void {
@@ -49,6 +67,14 @@ export class ProfileComponent implements OnInit {
   unsubscribe(subscriptionId: number): void {
     console.log('Se désabonner de l’abonnement :', subscriptionId);
     // Logique pour se désabonner
+        if (this.profileForm.valid || true) {
+          console.log('Form Submitted', this.profileForm.value);
+          const registerRequest = this.profileForm.value as RegisterRequest;
+         this.authService.register(registerRequest).subscribe({
+          next: () => this.router.navigate(['/auth/login']),
+          error: () => this.onError = true,
+          });
+        }
   }
 
     // Récupérer les topics

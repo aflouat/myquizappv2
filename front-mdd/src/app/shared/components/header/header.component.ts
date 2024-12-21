@@ -11,16 +11,18 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit{
   showRightMenu:boolean =false;
   private subscription: Subscription = new Subscription();
-isMobile: boolean= false;
+  isMobile: boolean= false;
 
-  constructor(    private sessionService: SessionService  ){}
-  ngOnInit(): void {
-    this.subscription = this.sessionService.$isLogged().subscribe((isLogged) => {
-      this.showRightMenu = isLogged;
-    });
-    this.checkScreenSize();
+  constructor(    private sessionService: SessionService ){}
  
-  }
+ 
+  ngOnInit(): void {
+    this.subscription = this.sessionService.$isLogged().subscribe({
+      next: (isLogged) => (this.showRightMenu = isLogged),
+    });
+
+    this.checkScreenSize();
+   }
 
    // Écoute les changements de taille d'écran
    @HostListener('window:resize', [])
@@ -32,10 +34,4 @@ isMobile: boolean= false;
    private checkScreenSize() {
      this.isMobile = window.innerWidth <= 768; // Par exemple, 768px est la largeur max pour mobile
    }
-
- 
-  }
-
-
-
-
+}

@@ -6,6 +6,6 @@
     <div class="comment-item-content">{{comment.content}} </div>
 </div>
 <div class="new-comment" *ngIf="postId">
-<app-comment-create  [postId]="postId"></app-comment-create>
+<app-comment-create  [postId]="postId" (commentAdded)="onCommentAdded()"></app-comment-create>
 </div>
 </div>

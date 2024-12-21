@@ -8,10 +8,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { DateFormatPipe } from 'src/pipes/date-format.pipe';
 import {MatSelectModule} from '@angular/material/select';
+import { MatGridListModule } from '@angular/material/grid-list';
 
   
 @NgModule({
-    declarations: [
+  declarations: [
        ],
   imports: [
     MatFormFieldModule,
@@ -25,7 +26,7 @@ import {MatSelectModule} from '@angular/material/select';
    MatFormFieldModule,
    MatLabel,
    MatToolbarModule,
-MatSelectModule
+MatSelectModule,MatGridListModule
    
   ],
   exports: [
@@ -40,8 +41,8 @@ MatSelectModule
    MatFormFieldModule,
    MatLabel,
    MatToolbarModule,
-   MatSelectModule
-
+   MatSelectModule,
+   MatGridListModule
   ],
 })
 export class SharedModule {}
