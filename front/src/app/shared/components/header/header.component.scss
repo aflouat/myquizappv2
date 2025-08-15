@@ -11,6 +11,18 @@ mat-toolbar {
 
 }
 
+.menu-desktop {
+  display: flex;
+  align-items: center; /* centre verticalement tous les éléments */
+  gap: 8px; /* espace entre les éléments */
+}
+
+.menu-desktop p {
+  margin: 0;           /* supprime le margin par défaut des <p> */
+  font-weight: bold;   /* style optionnel */
+}
+
+
  
 
 /* Menu complet visible uniquement sur grand écran */
