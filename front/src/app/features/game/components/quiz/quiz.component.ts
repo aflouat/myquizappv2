@@ -3,7 +3,7 @@ import { QuizService } from '../../services/quiz.service';
 
 @Component({
   selector: 'app-quiz',
-    standalone: false,
+  standalone: false,
   templateUrl: './quiz.component.html',
 })
 export class QuizComponent implements OnInit {
@@ -12,8 +12,9 @@ export class QuizComponent implements OnInit {
   player = 'Omar';
   currentQuestionIndex: number = 0;
   answerStates: { [answerId: number]: boolean } = {};
+  hasAnswered: boolean = false;
 
-  constructor(private quizService: QuizService) {}
+  constructor(private quizService: QuizService) { }
 
   ngOnInit() {
     this.quizService.getQuizById(this.id).subscribe(data => {
@@ -27,12 +28,17 @@ export class QuizComponent implements OnInit {
     } else {
       alert('Mauvaise réponse ❌');
     }
+    const isCorrect = question.correctAnswerId === answerId;
+    this.answerStates[answerId] = isCorrect;
+    this.hasAnswered = true; // Indiquer qu'une réponse a été sélectionnée
+    this.answerStates = { ...this.answerStates }; // Forcer la mise à jour
   }
 
   nextQuestion() {
     if (this.currentQuestionIndex < this.quiz.questions.length - 1) {
       this.currentQuestionIndex++;
       this.answerStates = {}; // Réinitialiser les états pour la nouvelle question
+      this.hasAnswered = false;
     }
   }
   previousQuestion() {
@@ -48,6 +54,6 @@ export class QuizComponent implements OnInit {
     this.answerStates = {}; // Réinitialiser les états des réponses
     this.quiz = null; // Réinitialiser le quiz
 
-    }
+  }
 
 }

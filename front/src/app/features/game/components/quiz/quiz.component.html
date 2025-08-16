@@ -12,36 +12,22 @@
           <p>{{ quiz.questions[currentQuestionIndex].text }}</p>
           <mat-list>
             <mat-list-item *ngFor="let answer of quiz.questions[currentQuestionIndex].answers">
-              <button
-                mat-raised-button
-                [ngClass]="{
-              'correct': answerStates[answer.id],
-              'incorrect': !answerStates[answer.id]
-            }"
-                (click)="checkAnswer(quiz.questions[currentQuestionIndex], answer.id)"
-                [disabled]="answerStates[answer.id] != null"
-              >
+              <button mat-raised-button [ngClass]="{
+              'correct': answerStates[answer.id] === true,
+              'incorrect': answerStates[answer.id] === false
+            }" (click)="checkAnswer(quiz.questions[currentQuestionIndex], answer.id)"
+                [disabled]="answerStates[answer.id] != null">
                 {{ answer.text }}
               </button>
-              -
             </mat-list-item>
           </mat-list>
           <div class="navigation">
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="nextQuestion()"
-              [disabled]="!answerStates[currentQuestionIndex]"
-              *ngIf="currentQuestionIndex < quiz.questions.length - 1"
-            >
+            <button mat-raised-button color="primary" (click)="nextQuestion()" [disabled]="!hasAnswered"
+              *ngIf="currentQuestionIndex < quiz.questions.length - 1">
               Question suivante
             </button>
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="finishQuiz()"
-              *ngIf="currentQuestionIndex === quiz.questions.length - 1 && answerStates[currentQuestionIndex]"
-            >
+            <button mat-raised-button color="primary" (click)="finishQuiz()"
+              *ngIf="currentQuestionIndex === quiz.questions.length - 1 && hasAnswered">
               Terminer
             </button>
           </div>
