@@ -1,16 +1,24 @@
 <div class="post-container">
 
-  <!-- Barre supérieure -->
+   <!-- Bouton centré pour démarrer un nouveau jeu -->
+
   <div class="row">
     <div class="col-2">  
       <button mat-raised-button color="primary" [routerLink]="['../create']">Créer un article</button>
     </div>
+
     <div class="col-2 post-sorter">
       <button mat-button (click)="toggleSortOrder()"> 
         Trier par {{ sortOrder === 'asc' ? '&#x2191;' : '&#x2193;' }}
 
       </button>
     </div>
+  </div>
+  <div class="row" style="justify-content: center; margin: 20px 0;">
+    <div class="col-2"></div>
+    <button mat-raised-button color="primary" (click)="startNewGame()">
+      Démarrer un nouveau jeu
+    </button>
   </div>
 
   <!-- Grille des posts -->

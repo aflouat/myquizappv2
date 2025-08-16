@@ -42,6 +42,14 @@ this.sortOrder='desc';
    
   }
 
+  startNewGame() {
+  window.location.href = 'http://localhost:4200/game/quiz/1';
+}
+  startNewGameWithId(id: number) {
+    this.router.navigate(['/game/quiz', id]);
+}
+
+
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
     const target = event.target as Window;
