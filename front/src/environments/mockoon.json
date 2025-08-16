@@ -651,6 +651,62 @@
       ],
       "responseMode": null,
       "type": "http"
+    },
+    {
+      "uuid": "7d40eda3-0f8f-407f-8f21-6f4df404983c",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "quiz",
+      "responses": [
+        {
+          "uuid": "7b2e95b6-9e34-4528-887b-ff60ce7cca35",
+          "body": "{ \n  \"quiz\": [\n    {\n      \"id\":1,\n    \"title\":\"math\"\n    },\n    {\n      \"id\":2,\n    \"title\":\"francais\"\n    }\n]\n}\n    ",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE",
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "d65f56cf-3436-4563-9204-59b8225c73a3",
+          "body": "",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Bearer jwt",
+              "invert": true,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE",
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "type": "http"
     }
   ],
   "proxyMode": false,
@@ -738,6 +794,10 @@
     {
       "type": "route",
       "uuid": "92d1890e-ed8b-418e-bb62-45402d8d70e8"
+    },
+    {
+      "type": "route",
+      "uuid": "7d40eda3-0f8f-407f-8f21-6f4df404983c"
     }
   ],
   "callbacks": []
