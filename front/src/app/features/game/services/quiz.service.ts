@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from '../../../../environments/environment';
+import {HttpHeadersService} from '../../../shared/services/http.headers.service';
+import {Topic} from '../../topic/interfaces/topic.interface';
 @Injectable({
   providedIn: 'root'
 })
 
 export class QuizService {
-  constructor(private http: HttpClient) {}
-  getQuiz(): Observable<any> {
-    return this.http.get('http://localhost:3000/quiz'); // URL Mockoon
+  private baseUrl = environment.baseUrl;
+
+  private pathModule = this.baseUrl+'quiz';
+  constructor(private httpClient: HttpClient, private httpHeadersService:HttpHeadersService) { }
+
+  getQuizById(id: number): Observable<any> {
+    return this.httpClient.get(`${this.pathModule}/${id}`, { headers: this.httpHeadersService.getHeaders() });
   }
+
+
 }

@@ -600,11 +600,11 @@
       "uuid": "92d1890e-ed8b-418e-bb62-45402d8d70e8",
       "documentation": "",
       "method": "get",
-      "endpoint": "game/quiz",
+      "endpoint": "quiz/1",
       "responses": [
         {
           "uuid": "666dc6de-f4fa-42d9-bbc6-e386d7a8c098",
-          "body": "{\r\n  \"player\": \"Omar\",\r\n  \"quiz\": {\r\n    \"title\": \"math\",\r\n    \"questions\": [\r\n      {\r\n        \"id\": 1,\r\n        \"text\": \"Quel est le carré de 1 ?\",\r\n        \"answers\": [\r\n          { \"id\": 1, \"text\": \"1\" },\r\n          { \"id\": 2, \"text\": \"2\" }\r\n        ],\r\n        \"correctAnswerId\": 1\r\n      }\r\n    ]\r\n  }\r\n}\r\n",
+          "body": " {\r\n    \"id\":1,\r\n    \"title\": \"math\",\r\n    \"questions\": [\r\n      {\r\n        \"id\": 1,\r\n        \"text\": \"Quel est le carré de 1 ?\",\r\n        \"answers\": [\r\n          { \"id\": 1, \"text\": \"1\" },\r\n          { \"id\": 2, \"text\": \"2\" }\r\n        ],\r\n        \"correctAnswerId\": 1\r\n      }\r\n    ]\r\n  }\r\n\r\n",
           "latency": 0,
           "statusCode": 200,
           "label": "",

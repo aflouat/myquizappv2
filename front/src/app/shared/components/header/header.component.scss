@@ -22,6 +22,12 @@ mat-toolbar {
   font-weight: bold;   /* style optionnel */
 }
 
+class .menu-desktop p {
+  display: flex;
+  align-items: center; /* centre verticalement tous les éléments */
+  gap: 8px; /* espace entre les éléments */
+  color: violet; /* Couleur du texte */
+}
 
  
 
