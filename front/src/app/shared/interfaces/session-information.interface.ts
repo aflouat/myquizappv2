@@ -7,5 +7,6 @@ export interface SessionInformation {
   firstName: string;
   lastName: string;
   admin: boolean;
-  email:string; //TODO
+  email: string; //TODO
+  score: number;
 }

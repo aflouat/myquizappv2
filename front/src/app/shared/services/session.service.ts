@@ -16,7 +16,7 @@ export class SessionService {
     console.log('SessionService.constructor');
     const token = localStorage.getItem('token');
     console.log('token2:', token);
-  
+
     if (token) {
       this.isLogged = true;
       this.userService.loadSessionInformation(token).subscribe({
@@ -38,7 +38,9 @@ export class SessionService {
 
   public logIn(sessionInformation: SessionInformation): void {
     localStorage.setItem('token', sessionInformation.token);
+    localStorage.setItem('score', sessionInformation.score.toString());
     this.sessionInformation = sessionInformation;
+    console.log('SessionService.logIn', sessionInformation);
     this.isLogged = true;
     this.next();
   }
