@@ -1,1 +1,19 @@
-<p>quiz works!</p>
+<div class="quiz-container">
+  <div class="content">
+  <h1>Quiz</h1>
+
+  <h2>{{ quiz?.title }}</h2>
+  <p>Joueur : {{ player }}</p>
+
+  <div *ngFor="let question of quiz?.questions">
+    <p>{{ question.text }}</p>
+    <ul>
+      <li *ngFor="let answer of question.answers">
+        <button (click)="checkAnswer(question, answer.id)">
+          {{ answer.text }}
+        </button>
+      </li>
+    </ul>
+  </div>
+  </div>
+</div>
