@@ -9,15 +9,19 @@ export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' }, // Route par défaut
     { path: 'home',     canActivate: [UnauthGuard],
         component: HomeComponent },
-    { path: 'auth',    
+    { path: 'auth',
         loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
     { path: 'subscription',     canActivate: [AuthGuard],
         loadChildren: () => import('./features/topic/topic.module').then(m => m.TopicModule) },
-        
-        { 
+
+        {
             path:'post', canActivate:[AuthGuard],
             loadChildren:() => import('./features/post/post.module').then(m =>m.PostModule)
-        }
+        },
+  {
+    path:'game', canActivate:[AuthGuard],
+    loadChildren:() => import('./features/game/game.module').then(m =>m.GameModule)
+  }
 
 
 
