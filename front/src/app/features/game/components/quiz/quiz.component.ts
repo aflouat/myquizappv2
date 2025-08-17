@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { QuizService } from '../../services/quiz.service';
 
 @Component({
   selector: 'app-quiz',
   standalone: false,
   templateUrl: './quiz.component.html',
+
 })
 export class QuizComponent implements OnInit {
   quiz: any;

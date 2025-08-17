@@ -5,49 +5,47 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-post-list',
-    templateUrl: './post-list.component.html',
-    styleUrls: ['./post-list.component.scss'],
-    standalone: false
+  selector: 'app-post-list',
+  templateUrl: './post-list.component.html',
+  styleUrls: ['./post-list.component.scss'],
+  standalone: false
 })
-export class PostListComponent implements OnInit, OnDestroy{
-  posts:Post[] =[];
+export class PostListComponent implements OnInit, OnDestroy {
+  posts: Post[] = [];
   errorMessage: string = '';
   gridCols: number = 2; // Nombre de colonnes par défaut
-  sortOrder!:string;
+  sortOrder!: string;
   private postListSubscription: Subscription | undefined;
 
 
-  constructor(private postService: PostService, private router:Router) {}
+  constructor(private postService: PostService, private router: Router) { }
   ngOnDestroy(): void {
-    if(this.postListSubscription){
-        this.postListSubscription.unsubscribe();
+    if (this.postListSubscription) {
+      this.postListSubscription.unsubscribe();
     }
   }
 
   ngOnInit(): void {
-this.getPosts();
-this.adjustGridCols(window.innerWidth);
-this.sortOrder='desc';
+    this.getPosts();
+    this.adjustGridCols(window.innerWidth);
+    this.sortOrder = 'desc';
 
-}
+  }
 
   // Récupérer les topics
   getPosts(): void {
-  console.log("getPosts");
-      this.postListSubscription = this.postService.getPosts().subscribe({
-        next: (posts) => (this.posts = posts),
-        error: (err) => (this.errorMessage = 'Erreur lors du chargement des posts.'),
-      });
-   
+    console.log("getPosts");
+    this.postListSubscription = this.postService.getPosts().subscribe({
+      next: (posts) => (this.posts = posts),
+      error: (err) => (this.errorMessage = 'Erreur lors du chargement des posts.'),
+    });
+
   }
 
-  startNewGame() {
-  window.location.href = 'http://localhost:4200/game/quiz/1';
-}
+
   startNewGameWithId(id: number) {
     this.router.navigate(['/game/quiz', id]);
-}
+  }
 
 
   @HostListener('window:resize', ['$event'])
@@ -67,7 +65,7 @@ this.sortOrder='desc';
       return order === 'asc' ? dateA - dateB : dateB - dateA;
     });
   }
-  
+
   toggleSortOrder(): void {
     // Alternance entre 'asc' et 'desc'
     const currentOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';

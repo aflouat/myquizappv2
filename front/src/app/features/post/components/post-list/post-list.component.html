@@ -1,14 +1,14 @@
 <div class="post-container">
 
-   <!-- Bouton centré pour démarrer un nouveau jeu -->
+  <!-- Bouton centré pour démarrer un nouveau jeu -->
 
   <div class="row">
-    <div class="col-2">  
+    <div class="col-2">
       <button mat-raised-button color="primary" [routerLink]="['../create']">Créer un article</button>
     </div>
 
     <div class="col-2 post-sorter">
-      <button mat-button (click)="toggleSortOrder()"> 
+      <button mat-button (click)="toggleSortOrder()">
         Trier par {{ sortOrder === 'asc' ? '&#x2191;' : '&#x2193;' }}
 
       </button>
@@ -16,7 +16,7 @@
   </div>
   <div class="row" style="justify-content: center; margin: 20px 0;">
     <div class="col-2"></div>
-    <button mat-raised-button color="primary" (click)="startNewGame()">
+    <button mat-raised-button color="primary" (click)="startNewGameWithId(1)">
       Démarrer un nouveau jeu
     </button>
   </div>
@@ -25,7 +25,9 @@
   <mat-grid-list [cols]="gridCols" rowHeight="2:1" gutterSize="30px">
     <mat-grid-tile *ngFor="let post of posts" [routerLink]="['../detail', post.id]" class="post-card">
       <div class="card-content">
-        <span class="post-title"><h2>{{ post.title }}</h2></span>
+        <span class="post-title">
+          <h2>{{ post.title }}</h2>
+        </span>
         <div class="post-date-author">
           <div class="post-creation-date" *ngIf="post?.createdAt">{{post?.createdAt | dateFormat }}
           </div>
@@ -37,8 +39,8 @@
         <div class="post-content">
           <p>{{ post.content }}</p>
         </div>
-        
+
       </div>
     </mat-grid-tile>
-  </mat-grid-list> 
+  </mat-grid-list>
 </div>

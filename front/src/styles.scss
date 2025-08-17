@@ -3,19 +3,27 @@
 
 // Customize the entire app. Change :root to your selector if you want to scope the styles.
 :root {
-  @include mat.toolbar-overrides((
-    container-background-color: white,
-  ));
+  @include mat.toolbar-overrides((container-background-color: white,
+    ));
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+}
 
 h1 {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .error {
-    color: red;
+  color: red;
 }
 
 
@@ -41,10 +49,18 @@ mat-sidenav-content {
 
 /* ton conteneur principal de quiz */
 .quiz-container {
-  flex: 1; /* occupe tout l’espace */
+  flex: 1;
+  /* occupe tout l’espace */
   display: flex;
   flex-direction: column;
-  align-items: center;      /* horizontal */
-  justify-content: center;  /* vertical */
+  align-items: center;
+  /* horizontal */
+  justify-content: center;
+  /* vertical */
   text-align: center;
+}
+
+.mat-mdc-card {
+  background-color: #ce4141;
+  border-radius: 12px;
 }

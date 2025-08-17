@@ -2,16 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GameRoutingModule } from './game-routing.module';
-import {QuizComponent} from './components/quiz/quiz.component';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {JwtInterceptor} from '../../interceptors/jwt.interceptor';
-import {MatCardModule} from '@angular/material/card';
-import {MatListModule} from '@angular/material/list';
-import {MatButton} from '@angular/material/button';
+import { QuizComponent } from './components/quiz/quiz.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from '../../interceptors/jwt.interceptor';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatButton } from '@angular/material/button';
+import { MatToolbar } from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [QuizComponent],
-  imports: [ReactiveFormsModule, CommonModule, GameRoutingModule, MatCardModule, MatListModule, MatButton], // Ajout de CommonModule
+  imports: [ReactiveFormsModule, CommonModule, GameRoutingModule, MatCardModule, MatListModule, MatButton, MatToolbar,
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -20,4 +22,4 @@ import {MatButton} from '@angular/material/button';
     },
   ],
 })
-export class GameModule {}
+export class GameModule { }
