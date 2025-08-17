@@ -12,11 +12,11 @@ import { Quiz } from '../interfaces/quiz.interface';
 export class QuizService {
   private baseUrl = environment.baseUrl;
 
-  private pathModule = this.baseUrl + 'quiz';
+  private pathModule = `${this.baseUrl}/quiz`;
   constructor(private httpClient: HttpClient, private httpHeadersService: HttpHeadersService) { }
 
-  getQuizById(id: number): Observable<any> {
-    return this.httpClient.get(`${this.pathModule}/${id}`, { headers: this.httpHeadersService.getHeaders() });
+  getQuizById(id: number): Observable<Quiz> {
+    return this.httpClient.get<Quiz>(`${this.pathModule}/${id}`, { headers: this.httpHeadersService.getHeaders() });
   }
 
   // Liste des quiz (GET)
