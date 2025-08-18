@@ -2,9 +2,12 @@
 
   <div class="content">
     <mat-toolbar>
-      <span>Quiz {{ quiz?.title }} | Score: {{ score }}</span>
+      <span>Quiz {{ quiz?.title }} </span>
       <span class="spacer"></span>
+
     </mat-toolbar>
+    <mat-toolbar>
+      <span>Score: {{ score }}</span> </mat-toolbar>
 
 
     <mat-card *ngIf="quiz?.questions && quiz.questions.length > 0; else noQuestions">
@@ -35,6 +38,13 @@
           </mat-list-item>
         </mat-list>
       </mat-card-content>
+      <mat-card-footer>
+
+
+        <p *ngIf="isCorrect !== null && hasAnswered" [ngClass]="isCorrect ? 'mat-accent' : 'mat-warn'">
+          Votre réponse est {{ isCorrect ? 'correcte' : 'incorrecte' }}.
+        </p>
+      </mat-card-footer>
 
       <mat-card-actions class="navigation">
         <button mat-raised-button color="primary" (click)="nextQuestion()" [disabled]="!hasAnswered"
@@ -50,7 +60,8 @@
     </mat-card>
 
     <ng-template #noQuestions>
-      <p>Aucune question disponible.</p>
+      <p *ngIf="!isFinished">Aucune question disponible.</p>
+      <p *ngIf="isFinished">Quiz terminé ! Votre score final est {{ score }}.</p>
     </ng-template>
   </div>
 </div>

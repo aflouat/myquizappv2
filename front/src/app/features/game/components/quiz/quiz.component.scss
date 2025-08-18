@@ -40,6 +40,15 @@ mat-card {
   text-align: left;
   /* Centrer le texte */
 }
+
 .spacer {
   flex: 1 1 auto;
+}
+
+.mat-warn {
+  color: #c62828 !important; // rouge Material
+}
+
+.mat-accent {
+  color: #2e7d32 !important; // vert Material
 }
