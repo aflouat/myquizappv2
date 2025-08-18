@@ -2,8 +2,10 @@
 
   <div class="content">
     <mat-toolbar>
-      <span>Quiz {{ quiz?.title }}</span>
+      <span>Quiz {{ quiz?.title }} | Score: {{ score }}</span>
+      <span class="spacer"></span>
     </mat-toolbar>
+
 
     <mat-card *ngIf="quiz?.questions && quiz.questions.length > 0; else noQuestions">
       <mat-card-header>

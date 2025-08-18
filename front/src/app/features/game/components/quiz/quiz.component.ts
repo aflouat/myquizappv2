@@ -1,21 +1,21 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../../services/quiz.service';
 
 @Component({
   selector: 'app-quiz',
   standalone: false,
   templateUrl: './quiz.component.html',
-
 })
 export class QuizComponent implements OnInit {
   quiz: any;
-  id = 1
+  id = 1;
   player = 'Omar';
   currentQuestionIndex: number = 0;
   answerStates: { [answerId: number]: boolean } = {};
   hasAnswered: boolean = false;
+  score: number = 0; // 🔥 Nouveau : score du joueur
 
-  constructor(private quizService: QuizService) { }
+  constructor(private quizService: QuizService) {}
 
   ngOnInit() {
     this.quizService.getQuizById(this.id).subscribe(data => {
@@ -24,37 +24,41 @@ export class QuizComponent implements OnInit {
   }
 
   checkAnswer(question: any, answerId: number) {
-    if (answerId === question.correctAnswerId) {
+    const isCorrect = question.correctAnswerId === answerId;
+
+    if (isCorrect) {
       alert('Bonne réponse 🎉');
+      this.score += 10; // 🔥 Incrémentation du score
     } else {
       alert('Mauvaise réponse ❌');
     }
-    const isCorrect = question.correctAnswerId === answerId;
+
     this.answerStates[answerId] = isCorrect;
-    this.hasAnswered = true; // Indiquer qu'une réponse a été sélectionnée
+    this.hasAnswered = true;
     this.answerStates = { ...this.answerStates }; // Forcer la mise à jour
   }
 
   nextQuestion() {
     if (this.currentQuestionIndex < this.quiz.questions.length - 1) {
       this.currentQuestionIndex++;
-      this.answerStates = {}; // Réinitialiser les états pour la nouvelle question
+      this.answerStates = {};
       this.hasAnswered = false;
     }
   }
+
   previousQuestion() {
     if (this.currentQuestionIndex > 0) {
       this.currentQuestionIndex--;
-      this.answerStates = {}; // Réinitialiser les états pour la nouvelle question
+      this.answerStates = {};
     }
   }
+
   finishQuiz() {
-    alert('Quiz terminé ! Merci d\'avoir joué.');
-    // Logique pour terminer le quiz, par exemple, rediriger vers une autre page ou afficher un score
-    this.currentQuestionIndex = 0; // Réinitialiser l'index de la question
-    this.answerStates = {}; // Réinitialiser les états des réponses
-    this.quiz = null; // Réinitialiser le quiz
-
+    alert(`Quiz terminé ! 🎯 Score final : ${this.score}`);
+    // Réinitialisations
+    this.currentQuestionIndex = 0;
+    this.answerStates = {};
+    this.quiz = null;
+    this.score = 0; // 🔥 Reset du score
   }
-
 }
