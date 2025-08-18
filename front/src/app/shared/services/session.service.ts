@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SessionInformation } from '../interfaces/session-information.interface';
 import { UserService } from './user.service';
+import { ScoreService } from 'src/app/features/game/services/score.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class SessionService {
   public sessionInformation: SessionInformation | undefined;
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private scoreService: ScoreService) {
     console.log('SessionService.constructor');
     const token = localStorage.getItem('token');
     console.log('token2:', token);
@@ -38,7 +39,8 @@ export class SessionService {
 
   public logIn(sessionInformation: SessionInformation): void {
     localStorage.setItem('token', sessionInformation.token);
-    localStorage.setItem('score', sessionInformation.score.toString());
+    this.scoreService.saveScore(sessionInformation.score.toString());
+
     this.sessionInformation = sessionInformation;
     console.log('SessionService.logIn', sessionInformation);
     this.isLogged = true;
