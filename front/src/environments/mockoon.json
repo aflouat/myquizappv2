@@ -386,7 +386,7 @@
       "uuid": "f0404b76-6cee-4cdc-8c5a-cb718f443ae8",
       "documentation": "",
       "method": "get",
-      "endpoint": "posts",
+      "endpoint": "post",
       "responses": [
         {
           "uuid": "09318b7a-1656-44bb-a6fa-0180ed8ffde2",
@@ -726,63 +726,9 @@
         }
       ],
       "responseMode": null,
-      "type": "http"
-    },
-    {
-      "uuid": "d3bd0169-5b4f-41cf-9f2f-565a32a36c0d",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "topics",
-      "responses": [
-        {
-          "uuid": "b2a7811d-dedb-41a5-9826-f2547bb946db",
-          "body": "[\r\n    {\r\n        \"id\": 1,\r\n        \"subject\": \"PHP\",\r\n        \"description\": \"divers sujets passionnants liés au langage PHP\",\r\n        \"userSubscribed\": false\r\n    }\r\n]",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [],
-          "filePath": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "databucketID": "",
-          "bodyType": "INLINE",
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "b1801d99-fd19-49d6-80d0-3a01c3d8fe6f",
-          "body": "",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "",
-          "headers": [],
-          "filePath": "",
-          "sendFileAsBody": false,
-          "rules": [
-            {
-              "target": "header",
-              "modifier": "Authorization",
-              "value": "Bearer jwt",
-              "invert": true,
-              "operator": "equals"
-            }
-          ],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "databucketID": "",
-          "bodyType": "INLINE",
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "type": "http"
+      "type": "http",
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "proxyMode": false,
@@ -874,10 +820,6 @@
     {
       "type": "route",
       "uuid": "7d40eda3-0f8f-407f-8f21-6f4df404983c"
-    },
-    {
-      "type": "route",
-      "uuid": "d3bd0169-5b4f-41cf-9f2f-565a32a36c0d"
     }
   ],
   "callbacks": []

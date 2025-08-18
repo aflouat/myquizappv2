@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { HttpHeadersService } from '../../../shared/services/http.headers.service';
 import { Topic } from '../../topic/interfaces/topic.interface';
@@ -20,10 +20,10 @@ export class QuizService {
   }
 
   // Liste des quiz (GET)
-  getQuiz(): Observable<Quiz[]> {
-    return this.httpClient.get<Quiz[]>(this.pathModule, { headers: this.httpHeadersService.getHeaders() });
-
-
+ getQuiz(): Observable<Quiz[]> {
+    return this.httpClient.get<{ quiz: Quiz[] }>(this.pathModule,  { headers: this.httpHeadersService.getHeaders() }).pipe(
+      map(response => response.quiz) // 🔥 extraire uniquement le tableau "quiz"
+    );
   }
 
 

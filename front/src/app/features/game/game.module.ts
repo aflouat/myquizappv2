@@ -9,17 +9,17 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatButton } from '@angular/material/button';
 import { MatToolbar } from "@angular/material/toolbar";
+import { QuizListComponent } from './quiz-list/quiz-list.component';
 
 @NgModule({
-  declarations: [QuizComponent],
-  imports: [ReactiveFormsModule, CommonModule, GameRoutingModule, MatCardModule, MatListModule, MatButton, MatToolbar,
-  ],
+  declarations: [QuizComponent, QuizListComponent],
+  imports: [ReactiveFormsModule, CommonModule, GameRoutingModule, MatCardModule, MatListModule, MatButton, MatToolbar],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true,
     },
-  ],
+  ]
 })
 export class GameModule { }
