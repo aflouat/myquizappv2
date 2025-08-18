@@ -1,6 +1,6 @@
 {
   "uuid": "4d119589-fd22-4cf9-ad3b-9f01449d3a27",
-  "lastMigration": 33,
+  "lastMigration": 32,
   "name": "Quiz app",
   "endpointPrefix": "api",
   "latency": 0,
@@ -75,9 +75,7 @@
         }
       ],
       "responseMode": null,
-      "type": "http",
-      "streamingMode": null,
-      "streamingInterval": 0
+      "type": "http"
     },
     {
       "uuid": "62ff8da2-8a4b-4bdc-90bb-99139593bb06",
@@ -155,9 +153,7 @@
         }
       ],
       "responseMode": null,
-      "type": "http",
-      "streamingMode": null,
-      "streamingInterval": 0
+      "type": "http"
     },
     {
       "uuid": "c5e48560-b0d2-46f9-b9fd-4b2e672e27df",
@@ -254,9 +250,7 @@
         }
       ],
       "responseMode": null,
-      "type": "http",
-      "streamingMode": null,
-      "streamingInterval": 0
+      "type": "http"
     },
     {
       "uuid": "3ff3df9c-c3b2-4b32-9dee-e30f32e4136d",
@@ -320,67 +314,7 @@
         }
       ],
       "responseMode": null,
-      "type": "http",
-      "streamingMode": null,
-      "streamingInterval": 0
-    },
-    {
-      "uuid": "7e250a60-70a0-4ec6-93bf-59d9c64e5621",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "topic",
-      "responses": [
-        {
-          "uuid": "146211d5-38c6-4ec5-9e6c-769488fb4a9b",
-          "body": "{ \n  \"topics\": [\n  {\n\t\"id\": 1,\n\t\"name\": \"test house 1\",\n\t\"surface\": 432,\n\t\"price\": 300,\n\t\"picture\": \"https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg\",\n\t\"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a lectus eleifend, varius massa ac, mollis tortor. Quisque ipsum nulla, faucibus ac metus a, eleifend efficitur augue. Integer vel pulvinar ipsum. Praesent mollis neque sed sagittis ultricies. Suspendisse congue ligula at justo molestie, eget cursus nulla tincidunt. Pellentesque elementum rhoncus arcu, viverra gravida turpis mattis in. Maecenas tempor elementum lorem vel ultricies. Nam tempus laoreet eros, et viverra libero tincidunt a. Nunc vel nisi vulputate, sodales massa eu, varius erat.\",\n\t\"owner_id\": 1,\n\t\"created_at\": \"2012/12/02\",\n\t\"updated_at\": \"2014/12/02\"  \n},\n{\n\t\"id\": 1,\n\t\"name\": \"test house 2\",\n\t\"surface\": 154,\n\t\"price\": 200,\n\t\"picture\": \"https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg\",\n\t\"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a lectus eleifend, varius massa ac, mollis tortor. Quisque ipsum nulla, faucibus ac metus a, eleifend efficitur augue. Integer vel pulvinar ipsum. Praesent mollis neque sed sagittis ultricies. Suspendisse congue ligula at justo molestie, eget cursus nulla tincidunt. Pellentesque elementum rhoncus arcu, viverra gravida turpis mattis in. Maecenas tempor elementum lorem vel ultricies. Nam tempus laoreet eros, et viverra libero tincidunt a. Nunc vel nisi vulputate, sodales massa eu, varius erat.\",\n\t\"owner_id\": 2,\n\t\"created_at\": \"2012/12/02\",\n\t\"updated_at\": \"2014/12/02\"  \n},{\n\t\"id\": 3,\n\t\"name\": \"test house 3\",\n\t\"surface\": 234,\n\t\"price\": 100,\n\t\"picture\": \"https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg\",\n\t\"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a lectus eleifend, varius massa ac, mollis tortor. Quisque ipsum nulla, faucibus ac metus a, eleifend efficitur augue. Integer vel pulvinar ipsum. Praesent mollis neque sed sagittis ultricies. Suspendisse congue ligula at justo molestie, eget cursus nulla tincidunt. Pellentesque elementum rhoncus arcu, viverra gravida turpis mattis in. Maecenas tempor elementum lorem vel ultricies. Nam tempus laoreet eros, et viverra libero tincidunt a. Nunc vel nisi vulputate, sodales massa eu, varius erat.\",\n\t\"owner_id\": 1,\n\t\"created_at\": \"2012/12/02\",\n\t\"updated_at\": \"2014/12/02\"  \n}\n  \n  ]\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [],
-          "filePath": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "databucketID": "",
-          "bodyType": "INLINE",
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "79e7c5f6-f571-465e-9b6b-646df773187a",
-          "body": "",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "",
-          "headers": [],
-          "filePath": "",
-          "sendFileAsBody": false,
-          "rules": [
-            {
-              "target": "header",
-              "modifier": "Authorization",
-              "value": "Bearer jwt",
-              "invert": true,
-              "operator": "equals"
-            }
-          ],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "databucketID": "",
-          "bodyType": "INLINE",
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "type": "http",
-      "streamingMode": null,
-      "streamingInterval": 0
+      "type": "http"
     },
     {
       "uuid": "f0404b76-6cee-4cdc-8c5a-cb718f443ae8",
@@ -436,9 +370,7 @@
         }
       ],
       "responseMode": null,
-      "type": "http",
-      "streamingMode": null,
-      "streamingInterval": 0
+      "type": "http"
     },
     {
       "uuid": "3ce96b4e-0f87-492f-96bd-0f9f9d5a4132",
@@ -494,9 +426,7 @@
         }
       ],
       "responseMode": null,
-      "type": "http",
-      "streamingMode": null,
-      "streamingInterval": 0
+      "type": "http"
     },
     {
       "uuid": "7dafba56-a5bb-42d3-9adf-617ff45d675f",
@@ -552,9 +482,7 @@
         }
       ],
       "responseMode": null,
-      "type": "http",
-      "streamingMode": null,
-      "streamingInterval": 0
+      "type": "http"
     },
     {
       "uuid": "0d9b6d10-e349-4fa3-9909-49d043e6f9b1",
@@ -610,9 +538,7 @@
         }
       ],
       "responseMode": null,
-      "type": "http",
-      "streamingMode": null,
-      "streamingInterval": 0
+      "type": "http"
     },
     {
       "uuid": "92d1890e-ed8b-418e-bb62-45402d8d70e8",
@@ -668,9 +594,7 @@
         }
       ],
       "responseMode": null,
-      "type": "http",
-      "streamingMode": null,
-      "streamingInterval": 0
+      "type": "http"
     },
     {
       "uuid": "7d40eda3-0f8f-407f-8f21-6f4df404983c",
@@ -783,6 +707,62 @@
       ],
       "responseMode": null,
       "type": "http"
+    },
+    {
+      "uuid": "c39135cd-9f5e-4503-8ed6-ce1848681e0d",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "subscription",
+      "responses": [
+        {
+          "uuid": "f1c04c5a-08b7-49bd-ad0b-572b4881f463",
+          "body": "{\n      {\n        \"title\": \"Préparer un JDD\",\n        \"content\": \"Apprenez à manipuler des jeux de données avec python.\",\n        \"topicSubject\": \"Datascience\",\n        \"createdAt\": null\n    }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE",
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "79257cf2-8444-439b-8391-b57dce6635bd",
+          "body": "",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Bearer jwt",
+              "invert": true,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE",
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "type": "http"
     }
   ],
   "proxyMode": false,
@@ -849,10 +829,6 @@
     },
     {
       "type": "route",
-      "uuid": "7e250a60-70a0-4ec6-93bf-59d9c64e5621"
-    },
-    {
-      "type": "route",
       "uuid": "f0404b76-6cee-4cdc-8c5a-cb718f443ae8"
     },
     {
@@ -878,6 +854,10 @@
     {
       "type": "route",
       "uuid": "d3bd0169-5b4f-41cf-9f2f-565a32a36c0d"
+    },
+    {
+      "type": "route",
+      "uuid": "c39135cd-9f5e-4503-8ed6-ce1848681e0d"
     }
   ],
   "callbacks": []
