@@ -376,7 +376,7 @@
       "uuid": "f0404b76-6cee-4cdc-8c5a-cb718f443ae8",
       "documentation": "",
       "method": "get",
-      "endpoint": "post",
+      "endpoint": "posts",
       "responses": [
         {
           "uuid": "09318b7a-1656-44bb-a6fa-0180ed8ffde2",
