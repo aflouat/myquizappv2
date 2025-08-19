@@ -1,20 +1,14 @@
 <div class="quiz-list-container">
   <h2>Liste des quiz</h2>
 
-  <ng-container *ngIf="quizList && quizList.length > 0; else noQuiz">
-    <mat-list>
-      <mat-list-item *ngFor="let quiz of quizList">
-        <mat-card class="quiz-card">
-          <mat-card-header>
-            <mat-card-title>{{ quiz.title }}</mat-card-title>
-            <mat-card-subtitle>
-              {{ quizList.length }} question(s)
-            </mat-card-subtitle>
-          </mat-card-header>
-        </mat-card>
-      </mat-list-item>
-    </mat-list>
-  </ng-container>
+  <div class="topics-container">
+  <div class="topic-card" *ngFor="let quiz of quizList">
+    <h3>{{ quiz.title }}</h3>
+    <div class="button-container">
+</div>
+  </div>
+</div>
+
 
   <ng-template #noQuiz>
     <p>Aucun quiz disponible.</p>
