@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 export class PostListComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   errorMessage: string = '';
+
   gridCols: number = 2; // Nombre de colonnes par défaut
   sortOrder!: string;
   private postListSubscription: Subscription | undefined;

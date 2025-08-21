@@ -492,7 +492,7 @@
       "responses": [
         {
           "uuid": "4a048b22-5d5a-45b5-9b50-f8311140cc70",
-          "body": "{\n  \"id\": 2,\n\t\"name\": \"Owner Name\",\n\t\"email\": \"test@test.com\",\n\n\t\"created_at\": \"2022/02/02\",\n\t\"updated_at\": \"2022/08/02\"  \n}",
+          "body": "{\n  \"id\": {{urlParam 'id'}},\n\t\"name\": \"Owner Name\",\n\t\"email\": \"test@test.com\",\n\n\t\"created_at\": \"2022/02/02\",\n\t\"updated_at\": \"2022/08/02\"  \n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -544,11 +544,11 @@
       "uuid": "92d1890e-ed8b-418e-bb62-45402d8d70e8",
       "documentation": "",
       "method": "get",
-      "endpoint": "quiz/1",
+      "endpoint": "quiz/:id",
       "responses": [
         {
           "uuid": "666dc6de-f4fa-42d9-bbc6-e386d7a8c098",
-          "body": " {\r\n    \"id\":1,\r\n    \"title\": \"math\",\r\n    \"questions\": [\r\n      {\r\n        \"id\": 1,\r\n        \"text\": \"Quel est le carré de 1 ?\",\r\n        \"answers\": [\r\n          { \"id\": 1, \"text\": \"1\" },\r\n          { \"id\": 2, \"text\": \"2\" }\r\n        ],\r\n        \"correctAnswerId\": 1\r\n      },\r\n      {\r\n        \"id\": 2,\r\n        \"text\": \"Quel est le carré de 3 ?\",\r\n        \"answers\": [\r\n          { \"id\": 1, \"text\": \"9\" },\r\n          { \"id\": 2, \"text\": \"6\" }\r\n        ],\r\n        \"correctAnswerId\": 1\r\n      },\r\n      {\r\n        \"id\": 3,\r\n        \"text\": \"Quel est le carré de 4 ?\",\r\n        \"answers\": [\r\n          { \"id\": 1, \"text\": \"8\" },\r\n          { \"id\": 2, \"text\": \"16\" }\r\n        ],\r\n        \"correctAnswerId\": 2\r\n      }\r\n    ]\r\n  }\r\n\r\n",
+          "body": " {\r\n    \"id\":{{urlParam 'id'}},\r\n    \"title\": \"math\",\r\n    \"questions\": [\r\n      {\r\n        \"id\": 1,\r\n        \"text\": \"Quel est le carré de 1 ?\",\r\n        \"answers\": [\r\n          { \"id\": 1, \"text\": \"1\" },\r\n          { \"id\": 2, \"text\": \"2\" }\r\n        ],\r\n        \"correctAnswerId\": 1\r\n      },\r\n      {\r\n        \"id\": 2,\r\n        \"text\": \"Quel est le carré de 3 ?\",\r\n        \"answers\": [\r\n          { \"id\": 1, \"text\": \"9\" },\r\n          { \"id\": 2, \"text\": \"6\" }\r\n        ],\r\n        \"correctAnswerId\": 1\r\n      },\r\n      {\r\n        \"id\": 3,\r\n        \"text\": \"Quel est le carré de 4 ?\",\r\n        \"answers\": [\r\n          { \"id\": 1, \"text\": \"8\" },\r\n          { \"id\": 2, \"text\": \"16\" }\r\n        ],\r\n        \"correctAnswerId\": 2\r\n      }\r\n    ]\r\n  }\r\n\r\n",
           "latency": 0,
           "statusCode": 200,
           "label": "",

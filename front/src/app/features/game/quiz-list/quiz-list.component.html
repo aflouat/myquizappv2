@@ -2,12 +2,12 @@
   <h2>Liste des quiz</h2>
 
   <div class="topics-container">
-  <div class="topic-card" *ngFor="let quiz of quizList">
-    <h3>{{ quiz.title }}</h3>
-    <div class="button-container">
-</div>
+    <div class="topic-card" *ngFor="let quiz of quizList" [routerLink]="['../../game/quiz', quiz.id]">
+      <h3>{{ quiz.title }}</h3>
+      <div class="button-container">
+      </div>
+    </div>
   </div>
-</div>
 
 
   <ng-template #noQuiz>
